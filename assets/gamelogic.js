@@ -1,4 +1,6 @@
 //declare global variables
+const redCardsHere = document.querySelector("#red-cards-here")
+
 let deck
 let BlackHand = []
 let RedHand = []
@@ -16,6 +18,23 @@ let i = 0
 let winner
 let winnerDeck
 
+const renderCards = (data) => data.map( (card) => ({ card: card.code, value: card.value, suit: card.suit, imgfile: `./assets/cards/${card.code.replace("0", "10")}.svg`}))
+
+const renderCards2 = (data) => data.map( (card) => ({ ...card, imgfile: `./assets/cards/${card.code.replace("0", "10")}.svg`}))
+
+
+function getRenderedCards(data){
+    const result = data.map( function(card) {
+        return {
+            code: card.code, 
+            value: card.value, 
+            suit: card.suit,
+            imgfile: `./assets/cards/${card.code.replace("0", "10")}.svg`
+        }
+    })
+    console.log(result)
+    return result
+}
 
 //BEGIN SETUP:
 //get deckId and call empty deck
@@ -77,7 +96,7 @@ function shuffleBlack(){
     })
     .then(function(data){
         console.log(data);
-        listBlackHand();
+        listHand('Black');
     })
 }
 
@@ -89,7 +108,7 @@ function shuffleRed(){
     })
     .then(function(data){
         console.log(data)
-        listRedHand();
+        listHand('Red');
     })
 }
 
@@ -113,14 +132,33 @@ function listBlackHand(){
     })
 }
 
-function listRedHand(){
+async function listHand(color){
+    const resp = await fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/${color}/list/`)
+    const data = await resp.json()
+    const renderableCards = getRenderedCards(data.piles[color].cards)
+    const container = document.createElement("div")
+    container.setAttribute("class", "hand hhand-compact");
+    renderableCards.forEach( function(card){
+        const cardImg = document.createElement("img")
+        cardImg.setAttribute("class", "card")
+        cardImg.setAttribute("data-value", card.value)
+        cardImg.setAttribute("data-suit", card.suit)
+        cardImg.setAttribute("src", card.imgfile)
+        container.appendChild(cardImg)
+    })
+    redCardsHere.appendChild(container)
+}
+
+function listRedHandOld(){
     // fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/${r}/list/`)
     fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/Red/list/`)
     .then(function(response){
         return response.json()
     })
     .then(function(data){
-        
+        console.log(data.piles.Red.cards)
+
+
         RedHand = []
         data.piles.Red.cards.forEach(function(element){
             RedHand.push(element.code)
@@ -326,3 +364,10 @@ function reshuffleRed(){
 }
 
 // // function checkWin(){
+
+redCardsHere.addEventListener("click", function(event){
+    console.log(event.target)
+    if( event.target.matches('.card') ){
+        console.log(`card clicked: ${event.target.getAttribute("data-value")} of ${event.target.getAttribute("data-suit")}`)
+    }
+})
