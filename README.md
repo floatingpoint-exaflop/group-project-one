@@ -41,9 +41,9 @@ This project uses Bootstrap 5.x.x, jQuery, and cardsJS.
 
 ### API and Library
 
-[Deck of Cards API](https://www.deckofcardsapi.com/) by [crobertsbmw](https://github.com/crobertsbmw)
+[Deck of Cards API](https://www.deckofcardsapi.com/) by [crobertsbmw](https://github.com/crobertsbmw).
 
-[CardsJS](https://richardschneider.github.io/cardsJS/) Copyright © 2015 [Richard Schneider](https://github.com/richardschneider/cardsJS)
+[CardsJS](https://richardschneider.github.io/cardsJS/) Copyright © 2015 [Richard Schneider](https://github.com/richardschneider/cardsJS).
 
 Thanks to Eric Meyer for the [reset.css](http://meyerweb.com/eric/tools/css/reset/) code.
 

@@ -12,11 +12,6 @@ body {
     height: 90%;
     background-image: url('./textures/tablefelt.png');
     background-size: cover;
-    border-image:url("http://blogrope.com/wp-content/uploads/2013/06/003-wood-melamine-subttle-pattern-background-pat.jpg") 30 30 stretch;
-    border: 15px solid url("http://blogrope.com/wp-content/uploads/2013/06/003-wood-melamine-subttle-pattern-background-pat.jpg") 30 30 stretch;
-    width: 300px;
-    padding: 10px 20px;
-    margin: 50px;
 }
     #battleground {
         width: 100%;

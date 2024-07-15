@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/reset.css" />
+    <link rel="stylesheet" href="./assets/reset.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./assets/cardtable.css" />
-    <link rel="icon" href="./assets/favicon/favicon.ico" type=“image/x-icon” />
-    <link rel=“shortcut icon” href=“favicon.ico” type=“image/x-icon”>
+    <link rel="stylesheet" href="./assets/cardtable.css">
+    <link rel="icon" href="./assets/favicon/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title>This Means War!</title>
 </head>
 <body class="d-flex flex-column min-vh-100">
     <main class="border border-warning border-5 w-100 min-vh-100 d-flex justify-content-center align-items-center">
-        <div id="card-table" class="column border border-primary border-5">
-
-
+        <div id="card-table" class="column border border-5">
             <div id="opposing-space" class="align-items-center border border-primary border-5">
                 <div id="computer-name-box" class="border border-primary border-5 d-flex justify-content-center"><p>Computer</p></div>
                 <div id="opposing-cards" class="row border border-2">
@@ -27,22 +25,17 @@
                 </div>
             </div>
 
-
-
-
             <div id="battleground" class="d-flex justify-content-center align-items-center border border-primary border-1">
                 <div id="war-opposing-space" class="row d-flex justify-content-center align-items-center border border-primary border-1">
                     <div id="war-opposing-round-1" class=""></div>
                     <div id="war-opposing-round-2" class=""></div>
                 </div>
                 <div id="battleground-play-space" class="row d-flex justify-content-center align-items-center border border-primary border-1"></div>
-                <div id="war-player-space" class="row d-flex justify-content-center align-items-center border border-primary border-1"></div>
+                <div id="war-player-space" class="row d-flex justify-content-center align-items-center border border-primary border-1">
                     <div id="war-player-round-1" class=""></div>
                     <div id="war-player-round-2" class=""></div>
+                </div>
             </div>
-
-
-
 
             <div id="player-space" class="align-items-center border border-primary border-5">
                 <div id="player-cards" class="row border border-2">
@@ -56,7 +49,14 @@
                 <div id="player-name-box" class="border border-primary border-5 d-flex justify-content-center"><p>Player</p></div>
             </div>
         </div>
+        <div id="🔊">🔊
+        <audio id="disco-ultralounge" loop>
+            <source src="./assets/disco-ultralounge-kevin-macleod.mp3" type="audio/mpeg">
+            <source src="./assets/disco-ultralounge-kevin-macleod.mp3" type="audio/ogg">
+        </audio>
+        </div>
     </main>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="./assets/speaker.js"></script>
 </body>
 </html>
