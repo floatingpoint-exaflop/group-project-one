@@ -26,7 +26,7 @@ function handleFormSubmit(e){
 
 
 // // Event listener for Start button
-let startButton = document.querySelector("#startGame")
+const startButton = document.querySelector("#startGame")
 startButton.addEventListener('click', redirect())
 
 
