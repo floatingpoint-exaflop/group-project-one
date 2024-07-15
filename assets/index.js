@@ -24,6 +24,13 @@ function handleFormSubmit(e){
   
 }
 
-function redirect(){
-    window.location.href="./assets/cardtable.html";
-}
+
+// // Event listener for Start button
+let startButton = document.querySelector("#startGame")
+startButton.addEventListener('click', redirect())
+
+
+// // Redirect to game page
+// function redirect(){
+//   window.location.href="./cardtable.html";
+// }

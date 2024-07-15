@@ -71,9 +71,9 @@
             <h3>
                 Start a new game!
             </h3>
-            <button id="start">
-                Start Game!
-            </button>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="button" class="btn btn-primary" id="startGame">Start Game!</button>
+            </div>
         </section>
         <section>
             <h3>
@@ -82,15 +82,25 @@
             <p>
                 Want to join our email list to receive new game updates? Fill out the form below.
             </p>
-            <form id="emailList">
-                <label for="fname">First name:</label><br>
-                <input type="text" id="fname" name="fname" required><br>
-                <label for="lname">Last name:</label><br>
-                <input type="text" id="lname" name="lname" required><br>
-                <label for="email">Email address:</label><br>
-                <input type="email" id="email" name="email" required autocomplete="off"><br>
-                <input type="submit" value="submit">
-            </form>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <form id="emailList">
+                    <div class="text-center">
+                        <label for="fname">First name:</label><br>
+                    </div>
+                    <input type="text" id="fname" name="fname" required><br>
+                    <div class="text-center">
+                        <label for="lname" class="mx-auto">Last name:</label><br>
+                    </div>
+                    <input type="text" id="lname" name="lname" required><br>
+                    <div class="text-center">
+                        <label for="email" class="mx-auto">Email address:</label><br>
+                    </div>
+                    <input type="email" id="email" name="email" required autocomplete="off"><br>
+                    <div class="text-center">
+                        <input type="submit" value="submit">
+                    </div>
+                </form>
+            </div>
         </section>
     </aside>
     <footer>
@@ -103,6 +113,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="./assets/index.js"></script>
-    <script src="./assets/gamelogic.js"></script>
+    <!-- <script src="./assets/gamelogic.js"></script> -->
 </body>
 </html>
