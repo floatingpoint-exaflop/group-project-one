@@ -2,14 +2,14 @@
 const redCardsHere = document.querySelector("#red-cards-here")
 
 let deck
-let BlackHand = []
-let RedHand = []
-let wonBlack = []
-let wonRed = []
-let contestedBlack = []
-let contestedRed = []
-let drawnBlack = []
-let drawnRed = []
+let BlackHand = [] //blackdeck
+let RedHand = [] //reddeck
+let wonBlack = []  //spoilsblack
+let wonRed = []  //spoilsred
+let contestedBlack = [] //blkencampment
+let contestedRed = [] //redencampment
+let drawnBlack = [] //battleblack first card was tie, second is new contest
+let drawnRed = [] //// redbattle first card was tie, second is new contest
 let go = false
 
 let b = 0
