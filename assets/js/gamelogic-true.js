@@ -12,11 +12,8 @@ let drawnBlack = []
 let drawnRed = []
 let currentHand
 let go = false
-
 let b = 0
 let r = 0
-let i = 0
-let x = Number
 let winner
 let winnerDeck
 
@@ -164,7 +161,6 @@ async function turn(){
         go = false
         if (BlackHand.length == 0){
             b == b++
-            console.log("b", b)
             currentHand = BlackHand
             let pile = 'Black'.concat(b)
             await reshuffle(wonBlack, pile)
@@ -172,7 +168,6 @@ async function turn(){
         }
         if (RedHand.length == 0){
             r == r++
-            console.log("r", r)
             currentHand = RedHand
             let pile = 'Red'.concat(r)
             await reshuffle(wonRed, pile)
@@ -187,29 +182,28 @@ async function turn(){
 
         //Compare cards
         let result = compareCards();
-        console.log(result, "wins!!")
         if(result === 'Black'){;
             winner = 'Black';
+            console.log("Black Wins!")
             winnerDeck = wonBlack;
             resolveTurn()
         } else if (result === 'Red'){
             winner = 'Red';
+            console.log("Red Wins!")
             winnerDeck = wonRed;
             resolveTurn();
         } else if (result === 'Tie'){
             // if(BlackHand.length < i+3)
             //     reshuffle()
             winner = 'Tie';
-
+            console.log("Tie! It's a War!")
             for (i=0; i < 3; i++){
                 if (BlackHand.length === 1 && wonBlack.length === 0){
                     break;
                 } else if (BlackHand.length === 0) {
                     b == b++
-                console.log("b", b)
                 currentHand = BlackHand
                 let pile = 'Black'.concat(b)
-                console.log("reshuffling black")
                 await reshuffle(wonBlack, pile)
                     
                 }
@@ -222,7 +216,6 @@ async function turn(){
                     break;
                 } else if (RedHand.length === 0) {
                     r == r++
-                    console.log("r", r)
                     currentHand = RedHand
                     let pile = 'Red'.concat(r)
                     await reshuffle(wonRed, pile)
@@ -318,8 +311,8 @@ function resolveTurn(){
     console.log('Black has', BlackHand, ' ready for battle');
     console.log('Black has conscripted', wonBlack);
     console.log('Red has conscripted', wonRed);
-    console.log(BlackHand.length);
-    console.log(RedHand.length);
+    console.log(BlackHand.length, "cards left for Black");
+    console.log(RedHand.length, "cards left got Red");
     contestedBlack = [];
     contestedRed = [];
     drawnBlack = [];
