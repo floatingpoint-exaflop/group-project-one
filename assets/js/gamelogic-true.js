@@ -111,7 +111,7 @@ async function listHand(hand){
     if (data.success === true){
         data.piles[hand].cards.forEach(function(element){
             currentHand.push(element.code)
-            console.log(`${hand}'s reinforcements have arrived!!`)
+             console.log(`${hand}'s reinforcements have arrived!!`)
         })
         go = true
         if (data.piles[hand].remaining = 0){
