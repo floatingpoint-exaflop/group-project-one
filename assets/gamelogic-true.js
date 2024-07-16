@@ -56,7 +56,6 @@ async function setUp(){
     } else {
         console.log('error')
     }
-    console.log('Whats wrong with this')
 }
 
 //Draw all cards from deck
@@ -120,14 +119,13 @@ async function listHand(hand){
             currentHand.push(element.code)
         })
         go = true
-        console.log("finished hand")
         if (data.piles[hand].remaining = 0){
             console.log('Game Over:')
         }
     } else {
         console.log('error')
     }
-    console.log(`${hand} are ready to serve ${currentHand}`)
+    console.log(` `)
     // Gary's Rendering
     // const renderableCards = getRenderedCards(data.piles[hand].cards)
     // const container = document.createElement("div")
