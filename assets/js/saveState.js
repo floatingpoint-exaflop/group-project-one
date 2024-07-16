@@ -23,26 +23,6 @@ const redPlayerNameEl = $('#red-name-box');
 //---------Search History and localStorage-------------
 //Reloads the saved game state and puts the cards back on the screen where they were when we saved.
 
-//redeclaring Jonathan's global variables because I am cooked and don't know how to test this
-
-// let deck
-// let BlackHand = [] //blackdeck
-// let RedHand = [] //reddeck
-// let wonBlack = []  //spoilsblack
-// let wonRed = []  //spoilsred
-// let contestedBlack = [] //blkencampment
-// let contestedRed = [] //redencampment
-// let drawnBlack = [] //battleblack first card was tie, second is new contest
-// let drawnRed = [] //// redbattle first card was tie, second is new contest
-// let go = false
-
-// let b = 0
-// let r = 0
-// let i = 0
-// let winner
-// let winnerDeck
-
-
 function saveGameState(event) {
     event.preventDefault();
     console.log('Saving Game...');
@@ -57,6 +37,7 @@ function saveGameState(event) {
         contestedRed: contestedRed,
         drawnBlack: drawnBlack,
         drawnRed: drawnRed,
+        currentHand: currentHand,
         go: go,
         b: b,
         r: r,
@@ -69,7 +50,7 @@ function saveGameState(event) {
 
 let gameStateString = JSON.stringify(gameState);
 localStorage.setItem('gameState', gameStateString);
-console.log('Game Saved.');
+console.log('Game Saved. Leaving page... BYE FELICIA');
 //leaves page, effectively making this a save-and-quit function.
 window.location.replace("./index.html");
 }
@@ -82,17 +63,17 @@ function loadGameState() {
         //If there's already a winner, we shouldn't even load the previous game state beyond this. We should nuke it all and restart.
         if (storedGameState.winner !== '') {
             localStorage.clear();
-            blackPlayerNameEl.empty();
-            blackHandEl.empty();
-            blackSpoilsEl.empty();
-            blackWarEl.empty();
-            blackCampEl.empty();
-            battleGroundEl.empty();
-            redCampEl.empty();
-            redWarEl.empty();
-            redSpoilsEl.empty();
-            redHandEl.empty();
-            redPlayerNameEl.empty();
+            blackPlayerNameEl.html('');
+            blackHandEl.html('');
+            blackSpoilsEl.html('');
+            blackWarEl.html('');
+            blackCampEl.html('');
+            battleGroundEl.html('');
+            redCampEl.html('');
+            redWarEl.html('');
+            redSpoilsEl.html('');
+            redHandEl.html('');
+            redPlayerNameEl.html('');
             alert("Since there was already a winner, the game will reset to be played again!");
             window.location.reload()
         }
@@ -103,47 +84,40 @@ function loadGameState() {
 }
 
 function refreshBoard(storedGameState){
-    console.log('Refreshing Board Display...');
-    //fill player names
-    blackPlayerNameEl.textContent = storedGameState.blackPlayerName;
-    redPlayerNameEl.textContent = storedGameState.redPlayerName;
-    //for piles which should be face up, get and display the last image in the array for each pile, if the pile should be face-up.
-    redWarEl.innerHTML = `<img src="../cards/${storedGameState.drawnRed.pop()}.svg" width="40px"height="60px">`;
-    blackWarEl.innerHTML = `<img src="../cards/${storedGameState.drawnBlack.pop()}.svg" width="40px"height="60px">`;
-    //face down piles
-    blackHandEl.innerHTML = `<img src="../cards/RED_BACK.svg" width="40px"height="60px">`;
-    blackSpoilsEl.creat = `<img src="../cards/RED_BACK.svg" width="40px"height="60px">`;
-    // blackCampEl.innerHTML = `<img src="../cards/RED_BACK.svg" width="40px"height="60px">`;
-    //need to show up to six cards in camp (last cards in the contestedBlack array)
-    let blackCardsCamp1 = document.createElement(`<img src="../cards/${storedGameState.contestedBlack.pop()}.svg" width="40px"height="60px">`)
-    let blackCardsCamp2 = document.createElement(`<img src="../cards/${storedGameState.contestedBlack[contestedBlack.length - 2]}.svg" width="40px"height="60px">`)
-    let blackCardsCamp3 = document.createElement(`<img src="../cards/${storedGameState.contestedBlack[contestedBlack.length - 3]}.svg" width="40px"height="60px">`)
-    let blackCardsCamp4 = document.createElement(`<img src="../cards/${storedGameState.contestedBlack[contestedBlack.length - 4]}.svg" width="40px"height="60px">`)
-    let blackCardsCamp5 = document.createElement(`<img src="../cards/${storedGameState.contestedBlack[contestedBlack.length - 5]}.svg" width="40px"height="60px">`)
-    let blackCardsCamp6 = document.createElement(`<img src="../cards/${storedGameState.contestedBlack[contestedBlack.length - 6]}.svg" width="40px"height="60px">`)
-    blackCampEl.appendChildren(blackCardsCamp1, blackCardsCamp2, blackCardsCamp3, blackCardsCamp4, blackCardsCamp5, blackCardsCamp6)
+    blackPlayerNameEl.text(blackPlayerName);
+    redPlayerNameEl.text(redPlayerName);
 
-    //need to show up to six cards in camp (last cards in the contestedRed array)
-    let redCardsCamp1 = document.createElement(`<img src="../cards/${storedGameState.contestedBlack.pop()}.svg" width="40px"height="60px">`)
-    let redCardsCamp2 = document.createElement(`<img src="../cards/${storedGameState.contestedBlack[contestedBlack.length - 2]}.svg" width="40px"height="60px">`)
-    let redCardsCamp3 = document.createElement(`<img src="../cards/${storedGameState.contestedBlack[contestedBlack.length - 3]}.svg" width="40px"height="60px">`)
-    let redCardsCamp4 = document.createElement(`<img src="../cards/${storedGameState.contestedBlack[contestedBlack.length - 4]}.svg" width="40px"height="60px">`)
-    let redCardsCamp5 = document.createElement(`<img src="../cards/${storedGameState.contestedBlack[contestedBlack.length - 5]}.svg" width="40px"height="60px">`)
-    let redCardsCamp6 = document.createElement(`<img src="../cards/${storedGameState.contestedBlack[contestedBlack.length - 6]}.svg" width="40px"height="60px">`)
-    blackCampEl.appendChildren(redCardsCamp1, redCardsCamp2, redCardsCamp3, redCardsCamp4, redCardsCamp5, redCardsCamp6)
+    blackWarEl.html(`<img src="./assets/cards/${drawnBlack.pop()}.svg" width="40px"height="60px">`);
+    redWarEl.html(`<img src="./assets/cards/${drawnRed.pop()}.svg" width="40px"height="60px">`);
 
-    redSpoilsEl.innerHTML = `<img src="../cards/RED_BACK.svg" width="40px"height="60px">`;
-    redHandEl.innerHTML = `<img src="../cards/RED_BACK.svg" width="40px"height="60px">`;
+    blackHandEl.html(`<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px">`);
+    redHandEl.html(`<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px">`);
+
+    blackSpoilsEl.html(`<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px">`);
+    redSpoilsEl.html(`<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px">`);
+
+    contestedBlack.forEach(card => {
+        let blackCardCamp = $(`<img src="./assets/cards/${card}.svg" width="40" height="60">`);
+        blackCampEl.append(blackCardCamp);})
+
+    contestedRed.forEach(card => {
+        let redCardCamp = $(`<img src="./assets/cards/${card}.svg" width="40" height="60">`);
+        redCampEl.append(redCardCamp);})
+
     let deck = storedGameState.deck;
     let go = storedGameState.go;
     let b = storedGameState.b;
     let r = storedGameState.r;
     let i = storedGameState.i;
+    let currentHand = storedGameState.currentHand;
     let winner = storedGameState.winner;
     let winnerDeck = storedGameState.winnerDeck;
 };
 
+//event listener to save game
 saveGameBtn.on('click', saveGameState);
-// viewRulesModalBtn.on('click', saveGameState);
 
-loadGameState()
+
+
+
+// loadGameState();
