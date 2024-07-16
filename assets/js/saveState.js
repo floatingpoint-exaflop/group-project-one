@@ -110,15 +110,32 @@ function refreshBoard(storedGameState){
     blackPlayerNameEl.textContent = storedGameState.blackPlayerName;
     redPlayerNameEl.textContent = storedGameState.redPlayerName;
     //for piles which should be face up, get and display the last image in the array for each pile, if the pile should be face-up.
-    redWarEl.innerHTML = `<img src="./assets/cards/${storedGameState.drawnRed.pop()}.svg" width="40px"height="60px">`;
-    blackWarEl.innerHTML = `<img src="./assets/cards/${storedGameState.drawnBlack.pop()}.svg" width="40px"height="60px">`;
+    redWarEl.innerHTML = `<img src="../cards/${storedGameState.drawnRed.pop()}.svg" width="40px"height="60px">`;
+    blackWarEl.innerHTML = `<img src="../cards/${storedGameState.drawnBlack.pop()}.svg" width="40px"height="60px">`;
     //face down piles
-    blackHandEl.innerHTML = `<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px">`;
-    blackSpoilsEl.innerHTML = `<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px">`;
-    blackCampEl.innerHTML = `<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px">`;
-    redCampEl.innerHTML = `<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px">`;
-    redSpoilsEl.innerHTML = `<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px">`;
-    redHandEl.innerHTML = `<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px">`;
+    blackHandEl.innerHTML = `<img src="../cards/RED_BACK.svg" width="40px"height="60px">`;
+    blackSpoilsEl.creat = `<img src="../cards/RED_BACK.svg" width="40px"height="60px">`;
+    // blackCampEl.innerHTML = `<img src="../cards/RED_BACK.svg" width="40px"height="60px">`;
+    //need to show up to six cards in camp (last cards in the contestedBlack array)
+    let blackCardsCamp1 = document.createElement(`<img src="../cards/${storedGameState.contestedBlack.pop()}.svg" width="40px"height="60px">`)
+    let blackCardsCamp2 = document.createElement(`<img src="../cards/${storedGameState.contestedBlack[contestedBlack.length - 2]}.svg" width="40px"height="60px">`)
+    let blackCardsCamp3 = document.createElement(`<img src="../cards/${storedGameState.contestedBlack[contestedBlack.length - 3]}.svg" width="40px"height="60px">`)
+    let blackCardsCamp4 = document.createElement(`<img src="../cards/${storedGameState.contestedBlack[contestedBlack.length - 4]}.svg" width="40px"height="60px">`)
+    let blackCardsCamp5 = document.createElement(`<img src="../cards/${storedGameState.contestedBlack[contestedBlack.length - 5]}.svg" width="40px"height="60px">`)
+    let blackCardsCamp6 = document.createElement(`<img src="../cards/${storedGameState.contestedBlack[contestedBlack.length - 6]}.svg" width="40px"height="60px">`)
+    blackCampEl.appendChildren(blackCardsCamp1, blackCardsCamp2, blackCardsCamp3, blackCardsCamp4, blackCardsCamp5, blackCardsCamp6)
+
+    //need to show up to six cards in camp (last cards in the contestedRed array)
+    let redCardsCamp1 = document.createElement(`<img src="../cards/${storedGameState.contestedBlack.pop()}.svg" width="40px"height="60px">`)
+    let redCardsCamp2 = document.createElement(`<img src="../cards/${storedGameState.contestedBlack[contestedBlack.length - 2]}.svg" width="40px"height="60px">`)
+    let redCardsCamp3 = document.createElement(`<img src="../cards/${storedGameState.contestedBlack[contestedBlack.length - 3]}.svg" width="40px"height="60px">`)
+    let redCardsCamp4 = document.createElement(`<img src="../cards/${storedGameState.contestedBlack[contestedBlack.length - 4]}.svg" width="40px"height="60px">`)
+    let redCardsCamp5 = document.createElement(`<img src="../cards/${storedGameState.contestedBlack[contestedBlack.length - 5]}.svg" width="40px"height="60px">`)
+    let redCardsCamp6 = document.createElement(`<img src="../cards/${storedGameState.contestedBlack[contestedBlack.length - 6]}.svg" width="40px"height="60px">`)
+    blackCampEl.appendChildren(redCardsCamp1, redCardsCamp2, redCardsCamp3, redCardsCamp4, redCardsCamp5, redCardsCamp6)
+
+    redSpoilsEl.innerHTML = `<img src="../cards/RED_BACK.svg" width="40px"height="60px">`;
+    redHandEl.innerHTML = `<img src="../cards/RED_BACK.svg" width="40px"height="60px">`;
     let deck = storedGameState.deck;
     let go = storedGameState.go;
     let b = storedGameState.b;
@@ -129,4 +146,4 @@ function refreshBoard(storedGameState){
 };
 
 saveGameBtn.on('click', saveGameState);
-viewRulesModalBtn.on('click', saveGameState);
+// viewRulesModalBtn.on('click', saveGameState);
