@@ -127,3 +127,6 @@ function refreshBoard(storedGameState){
     let winner = storedGameState.winner;
     let winnerDeck = storedGameState.winnerDeck;
 };
+
+saveGameBtn.on('click', saveGameState);
+viewRulesModalBtn.on('click', saveGameState);
