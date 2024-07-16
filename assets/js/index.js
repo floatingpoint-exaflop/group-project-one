@@ -26,11 +26,11 @@ function handleFormSubmit(e){
 
 
 // // Event listener for Start button
-const startButton = document.querySelector("#startGame")
-startButton.addEventListener('click', redirect())
+// const startButton = document.querySelector("#startGame")
+// startButton.addEventListener('click', redirect())
 
 
 // // Redirect to game page
-// function redirect(){
-//   window.location.href="./cardtable.html";
-// }
+function redirect(){
+  window.location.href="./cardtable.html";
+}
