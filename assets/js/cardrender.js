@@ -1,24 +1,3 @@
-// //-----------User Input DOM Elements-------------------
-// const saveGameBtn = document.getElementById('#save-game-button');
-// const musicBtn = document.getElementById('#🔊');
-// const viewRulesModalBtn = document.getElementById('computer-name-box');
-
-// //------Black Player's Card Location DOM Elements------
-// const blackPlayerNameEl = document.getElementById('computer-name-box');
-// const blackHandEl = document.getElementById('black-deck');
-// const blackSpoilsEl = document.getElementById('black-win-pile');
-// const blackWarEl = document.getElementById('war-black-round-1');
-// const blackCampEl = document.getElementById('war-black-round-2');
-
-// const battleGroundEl = document.getElementById('battleground-play-space');
-
-// //-------Red Player's Card Location DOM Elements-------
-// const redCampEl = document.getElementById('war-red-round-2');
-// const redWarEl = document.getElementById('war-red-round-1');
-// const redSpoilsEl = document.getElementById('red-win-pile');
-// const redHandEl = document.getElementById('red-deck');
-// const redPlayerNameEl = document.getElementById('red-name-box');
-
 //--------------------Functions------------------------
 //----Updating Displayed Contents of different divs----
 //Called for a given area by a gamelogic function that updates information for that area.
@@ -111,7 +90,7 @@ function updateRedCamp() {
         // blackCardCamp.src = `./assets/cards/${card}.svg`;
         // blackCardCamp.width = 40;
         // blackCardCamp.height = 60;
-        blackCampEl.append(redCardCamp);
+        redCampEl.append(redCardCamp);
         console.log("Updated Red Player's Camp Cards. These are at stake if Black wins this War!");
     });
 }
