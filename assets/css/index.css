@@ -59,6 +59,7 @@ h3 {
 
 /* Set style for the Footer element. */
 footer {
+    background-color: #d9dcd6;
     padding: 30px;
     clear: both;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
