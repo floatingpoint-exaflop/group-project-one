@@ -10,188 +10,186 @@ let contestedBlack = []
 let contestedRed = []
 let drawnBlack = []
 let drawnRed = []
+let currentHand
 let go = false
 
 let b = 0
 let r = 0
 let i = 0
+let x = Number
 let winner
 let winnerDeck
 
-const renderCards = (data) => data.map( (card) => ({ card: card.code, value: card.value, suit: card.suit, imgfile: `./assets/cards/${card.code.replace("0", "10")}.svg`}))
 
-const renderCards2 = (data) => data.map( (card) => ({ ...card, imgfile: `./assets/cards/${card.code.replace("0", "10")}.svg`}))
+//GARY'S RENDER FUNCTIONS
+// const renderCards = (data) => data.map( (card) => ({ card: card.code, value: card.value, suit: card.suit, imgfile: `./assets/cards/${card.code.replace("0", "10")}.svg`}))
+
+// const renderCards2 = (data) => data.map( (card) => ({ ...card, imgfile: `./assets/cards/${card.code.replace("0", "10")}.svg`}))
 
 
-function getRenderedCards(data){
-    const result = data.map( function(card) {
-        return {
-            code: card.code, 
-            value: card.value, 
-            suit: card.suit,
-            imgfile: `./assets/cards/${card.code.replace("0", "10")}.svg`
-        }
-    })
-    console.log(result)
-    return result
-}
+// function getRenderedCards(data){
+//     const result = data.map( function(card) {
+//         return {
+//             code: card.code, 
+//             value: card.value, 
+//             suit: card.suit,
+//             imgfile: `./assets/cards/${card.code.replace("0", "10")}.svg`
+//         }
+//     })
+//     console.log(result)
+//     return result
+// }
+//END RENDER FUNCTIONS
+
 
 //BEGIN SETUP:
-//get deckId and call empty deck
-function setUp(){
-    fetch('https://deckofcardsapi.com/api/deck/new/')
-    .then(function (response){
-        return response.json();
-    })
-    //declare deck id from response
-    .then(function (data){
-        deck = data.deck_id;
-        console.log(deck)
-        emptyDeck(deck)
-    })
+
+setUp()
+
+async function setUp(){
+    const resp = await fetch('https://deckofcardsapi.com/api/deck/new/')
+    const data = await resp.json()
+    if (data.success === true){
+        console.log("Deck obtained")
+        deck = data.deck_id
+        emptyDeck()
+    } else {
+        console.log('error')
+    }
+    console.log('Whats wrong with this')
 }
 
-//draw all cards from deck and call build piles
-function emptyDeck(deck){
-   fetch(`https://deckofcardsapi.com/api/deck/${deck}/draw/?count=52`)
-        .then(function (response){
-            return response.json();
-        })
-        .then(function (data){
-            console.log(data)
-            console.log(deck)
-            buildPiles(deck)
-        })
+//Draw all cards from deck
+async function emptyDeck(){
+    const resp = await fetch(`https://deckofcardsapi.com/api/deck/${deck}/draw/?count=52`)
+    const data = await resp.json()
+    if (data.success === true){
+        console.log("Deck emptied", data)
+        buildPiles()
+    } else {
+        console.log('error')
+    }
 }
 
 //build player piles of all Red and all Black cards. Call shuffle functions
-function buildPiles(deck){
-    // fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/Black${b}/add/?cards=AC,2C,3C,4C,5C,6C,7C,8C,9C,0C,JC,QC,KC,AS,2S,3S,4S,5S,6S,7S,8S,9S,0S,JS,QS,KS`)
-    fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/Black/add/?cards=AC,2C,3C,4C,5C,6C,7C,8C,9C,0C,JC,QC,KC,AS,2S,3S,4S,5S,6S,7S,8S,9S,0S,JS,QS,KS`)
-        .then(function(response){
-            return response.json()
-        })
-        .then(function (data){
-            console.log(data);
-            shuffleBlack()
-        })
-    // fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/Red${r}/add/?cards=AH,2H,3H,4H,5H,6H,7H,8H,9H,0H,JH,QH,KH,AD,2D,3D,4D,5D,6D,7D,8D,9D,0D,JD,QD,KD`)
-    fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/Red/add/?cards=AH,2H,3H,4H,5H,6H,7H,8H,9H,0H,JH,QH,KH,AD,2D,3D,4D,5D,6D,7D,8D,9D,0D,JD,QD,KD`)
-        .then(function(response){
-        return response.json()
-        })
-        .then(function (data){
-            console.log(data);
-            shuffleRed()
-        })
+async function buildPiles(){
+    const respB = await fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/Black0/add/?cards=AC,2C,3C,4C,5C,6C,7C,8C,9C,0C,JC,QC,KC,AS,2S,3S,4S,5S,6S,7S,8S,9S,0S,JS,QS,KS`)
+    const dataB = await respB.json()
+    if (dataB.success === true){
+        currentHand = BlackHand
+        let pile = 'Black'.concat(b)
+        console.log("Black built", dataB)
+        await shuffle(pile)
+        
+    } else {
+        console.log('error')
+    }
+    const respR = await fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/Red0/add/?cards=AH,2H,3H,4H,5H,6H,7H,8H,9H,0H,JH,QH,KH,AD,2D,3D,4D,5D,6D,7D,8D,9D,0D,JD,QD,KD`)
+    const dataR = await respR.json()
+    if (dataR.success === true){
+        currentHand = RedHand
+        let pile = 'Red'.concat(r)
+        console.log("Red built", dataR)
+        await shuffle(pile)
+    } else {
+        console.log('error')
+    }
 }
+
 //END SETUP:
 
-// Shuffle Piles
-function shuffleBlack(){
-    // fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/Black${b}/shuffle/`)
-    fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/Black/shuffle/`)
-    .then(function(response){
-        return response.json()
-    })
-    .then(function(data){
-        console.log(data);
-        listHand('Black');
-    })
+// Shuffle
+async function shuffle(hand){
+    resp = await fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/${hand}/shuffle/`)
+    data = await resp.json()
+    if (data.success === true){
+        console.log(`${hand} shuffled`)
+        await listHand(hand)
+    } else {
+        console.log('error')
+    }
 }
 
-function shuffleRed(){
-    // fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/Red${r}/shuffle/`)
-    fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/Red/shuffle/`)
-    .then(function(response){
-        return response.json()
-    })
-    .then(function(data){
-        console.log(data)
-        listHand('Red');
-    })
-}
-
-// List Piles, update variables for display
-function listBlackHand(){
-    fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/Black/list/`)
-    // fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/Black${b}/list/`)
-    .then(function(response){
-        return response.json()
-    })
-    .then(function(data){
-        BlackHand = []
-        data.piles.Black.cards.forEach(function(element){
-            BlackHand.push(element.code)
-        })
-        go = true
-        console.log('Black', BlackHand)
-        if (data.piles.Black.cards.length = 0){
-            console.log('Game Over: Red Wins')
-        }
-    })
-}
-
-async function listHand(color){
-    const resp = await fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/${color}/list/`)
+//List and update arrays
+async function listHand(hand){
+    const resp = await fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/${hand}/list/`)
     const data = await resp.json()
-    const renderableCards = getRenderedCards(data.piles[color].cards)
-    const container = document.createElement("div")
-    container.setAttribute("class", "hand hhand-compact");
-    renderableCards.forEach( function(card){
-        const cardImg = document.createElement("img")
-        cardImg.setAttribute("class", "card")
-        cardImg.setAttribute("data-value", card.value)
-        cardImg.setAttribute("data-suit", card.suit)
-        cardImg.setAttribute("src", card.imgfile)
-        container.appendChild(cardImg)
-    })
-    redCardsHere.appendChild(container)
-}
-
-function listRedHandOld(){
-    // fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/${r}/list/`)
-    fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/Red/list/`)
-    .then(function(response){
-        return response.json()
-    })
-    .then(function(data){
-        console.log(data.piles.Red.cards)
-
-
-        RedHand = []
-        data.piles.Red.cards.forEach(function(element){
-            RedHand.push(element.code)
+    console.log(data)
+    if (data.success === true){
+        data.piles[hand].cards.forEach(function(element){
+            currentHand.push(element.code)
         })
         go = true
-        console.log('Red', RedHand)
-        if (data.piles.Red.cards.length = 0){
-            console.log('Game Over: Black Wins')
+        console.log("finished hand")
+        if (data.piles[hand].remaining = 0){
+            console.log('Game Over:')
         }
-    })
+    } else {
+        console.log('error')
+    }
+    console.log(`${hand} are ready to serve ${currentHand}`)
+    // Gary's Rendering
+    // const renderableCards = getRenderedCards(data.piles[hand].cards)
+    // const container = document.createElement("div")
+    // container.setAttribute("class", "hand hhand-compact");
+    // renderableCards.forEach( function(card){
+    //     const cardImg = document.createElement("img")
+    //     cardImg.setAttribute("class", "card")
+    //     cardImg.setAttribute("data-value", card.value)
+    //     cardImg.setAttribute("data-suit", card.suit)
+    //     cardImg.setAttribute("src", card.imgfile)
+    //     container.appendChild(cardImg)
+    // })
+    // redCardsHere.appendChild(container)
 }
+
 
 function run(){
-    console.log('ready to play!')
+    if (RedHand.length === 26 && BlackHand.length === 26){
+        console.log('ready to play!')
+        go = true
+    } else {
+        console.log('error')
+    }
+    
 }
 
-setUp()
+
 //END OF SETUP:
 
 //TURN:
 
-//draw cards 1. api calls, BlackPlay and RedPlay
-//compare cards AFTER
-//
-
-function turn(){
+async function turn(){
     console.log('TURN')
+    
     if (go = true){
-        drawnBlack.push(BlackHand[i])
-        drawnRed.push(RedHand[i])
+        go = false
+        if (BlackHand.length == 0){
+            b == b++
+            console.log("b", b)
+            currentHand = BlackHand
+            let pile = 'Black'.concat(b)
+            await reshuffle(wonBlack, pile)
+            
+        }
+        if (RedHand.length == 0){
+            r == r++
+            console.log("r", r)
+            currentHand = RedHand
+            let pile = 'Red'.concat(r)
+            await reshuffle(wonRed, pile)
+        }
+        //Draw Cards
+        drawnBlack.push(BlackHand[0])
+        BlackHand.shift()
+        drawnRed.push(RedHand[0])
+        RedHand.shift()
+
+        console.log('Challengers:', 'Red,', drawnRed, 'Black,', drawnBlack)
+
         //Compare cards
         let result = compareCards();
-        //Resolve result
+        console.log(result, "wins!!")
         if(result === 'Black'){;
             winner = 'Black';
             winnerDeck = wonBlack;
@@ -204,24 +202,54 @@ function turn(){
             // if(BlackHand.length < i+3)
             //     reshuffle()
             winner = 'Tie';
-            contestedBlack.push(BlackHand[i+1], BlackHand[i+2], BlackHand[i+3]);
-            contestedRed.push(RedHand[i+1], RedHand[i+2], RedHand[i+3]);
-            i = (i+4);     
-    }     
+
+            for (i=0; i < 3; i++){
+                if (BlackHand.length === 1 && wonBlack.length === 0){
+                    break;
+                } else if (BlackHand.length === 0) {
+                    b == b++
+                console.log("b", b)
+                currentHand = BlackHand
+                let pile = 'Black'.concat(b)
+                console.log("reshuffling black")
+                await reshuffle(wonBlack, pile)
+                    
+                }
+                contestedBlack.push(BlackHand[0])
+                BlackHand.shift()
+                console.log(contestedBlack[0], "Has moved to encampment")
+            }
+            for (i=0; i < 3; i++){
+                if (RedHand.length === 1 && wonRed.length === 0){
+                    break;
+                } else if (RedHand.length === 0) {
+                    r == r++
+                    console.log("r", r)
+                    currentHand = RedHand
+                    let pile = 'Red'.concat(r)
+                    await reshuffle(wonRed, pile)
+                    
+                }
+                contestedRed.push(RedHand[0])
+                RedHand.shift()
+                console.log(contestedRed[0], "Has moved to encampment")
+            }
+        }   
+    }
 }
-}
+
 
 //Evaluate winner of turn
 function compareCards(){
-    let BlackCardValue = convertCard2Value(BlackHand[i])
-    let RedCardValue = convertCard2Value(RedHand[i])
+    let BlackCardValue = convertCard2Value(drawnBlack[drawnBlack.length-1])
+    let RedCardValue = convertCard2Value(drawnRed[drawnRed.length-1])
     if (BlackCardValue > RedCardValue){
         result = 'Black'
         return result
     } else if (BlackCardValue < RedCardValue){
         result = 'Red'
         return result
-    } else if (BlackCardValue = RedCardValue){
+    } else if (BlackCardValue == RedCardValue){
         result = 'Tie'
         return result
     }
@@ -270,7 +298,7 @@ function convertCard2Value(card){
         card === "AS" || card === "AC" || card === "AH" || card === "AD"){
             return 14
      }
-}
+};
 
 //Call API to update pile lists
 function resolveTurn(){
@@ -287,87 +315,38 @@ function resolveTurn(){
     drawnRed.forEach(function(element){
         winnerDeck.push(element);
     } );
-    let x = Number
-        console.log(i);
-    for (x = 0; x <=i; x++){
-        BlackHand.shift();
-        RedHand.shift();
-    };
-    if(RedHand.legth === 0){
-        reshuffleRed();
-        console.log("reshuffling red")
-    };
-    if(BlackHand.length === 0){
-        console.log("reshuffling black")
-        reshuffleBlack();
-    };
     
-    console.log('redhand', RedHand);
-    console.log('blachhand', BlackHand);
-    console.log('black wins', wonBlack);
-    console.log('red wins', wonRed);
+    console.log('Red has', RedHand, ' ready for battle');
+    console.log('Black has', BlackHand, ' ready for battle');
+    console.log('Black has conscripted', wonBlack);
+    console.log('Red has conscripted', wonRed);
     console.log(BlackHand.length);
     console.log(RedHand.length);
     contestedBlack = [];
     contestedRed = [];
     drawnBlack = [];
     drawnRed = [];
-    i = 0;
+    go = true
+};
     
+async function reshuffle(fromPile, toPile){
+    const resp = await fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/${toPile}/add/?cards=${fromPile}`)
+    const data = await resp.json()
+    if (data.success === true){
+        console.log("Reshuffling", data)
+        await shuffle(toPile)
+        fromPile.splice(0, fromPile.length)
+    } else {
+        console.log('error')
+    }
 };
 
-function reshuffleBlack(){
-    b = b++
-    console.log(b)
-        fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/Black${b}/add/?cards=${wonBlack}`)
-            .then(function(response){
-                return response.json()
-            })
-            .then(function (data){
-                console.log(data);
-                shuffleBlack()
-            })
-    }
-//     
-
-// console.log('reshuffling')
-//     fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/Black/add/?cards=${wonBlack}`)
-//     .then(function(response){
-//         return response.json()
-//     })
-//     .then(function(data){
-//         console.log(data);
-//         shuffleBlack()
-//     })
-// }
-
-function reshuffleRed(){
-    r = r++
-    console.log(r)
-    fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/Red${r}/add/?cards=${wonRed}`)
-            .then(function(response){
-            return response.json()
-            })
-            .then(function (data){
-                console.log(data);
-                shuffleRed()
-            })
-//     console.log('reshuffling')
-//     fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/Red/add/?cards=${wonRed}`)
-//     .then(function(response){
-//         return response.json()
-//     })
-//     .then(function(data){
-//         console.log(data);
-//         shuffleRed();
-//     })
-}
 
 // // function checkWin(){
 
-redCardsHere.addEventListener("click", function(event){
-    console.log(event.target)
-    if( event.target.matches('.card') ){
-        console.log(`card clicked: ${event.target.getAttribute("data-value")} of ${event.target.getAttribute("data-suit")}`)
-    }
-})
+// redCardsHere.addEventListener("click", function(event){
+//     console.log(event.target)
+//     if( event.target.matches('.card') ){
+//         console.log(`card clicked: ${event.target.getAttribute("data-value")} of ${event.target.getAttribute("data-suit")}`)
+//     }
+// })
