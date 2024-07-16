@@ -1,47 +1,46 @@
 //-----------User Input DOM Elements-------------------
-const saveGameBtn = document.getElementById('#save-game-button');
-const musicBtn = document.getElementById('#🔊');
-const viewRulesModalBtn = document.getElementById('computer-name-box');
+const saveGameBtn = $('#save-game-button');
+const musicBtn = $('#🔊');
+const viewRulesModalBtn = $('#computer-name-box');
 
 //------Black Player's Card Location DOM Elements------
-const blackPlayerNameEl = document.getElementById('computer-name-box');
-const blackHandEl = document.getElementById('black-deck');
-const blackSpoilsEl = document.getElementById('black-win-pile');
-const blackWarEl = document.getElementById('war-black-round-1');
-const blackCampEl = document.getElementById('war-black-round-2');
+const blackPlayerNameEl = $('#computer-name-box');
+const blackHandEl = $('#black-deck');
+const blackSpoilsEl = $('#black-win-pile');
+const blackWarEl = $('#war-black-round-1');
+const blackCampEl = $('#war-black-round-2');
 
-const battleGroundEl = document.getElementById('battleground-play-space');
+const battleGroundEl = $('#battleground-play-space');
 
 //-------Red Player's Card Location DOM Elements-------
-const redCampEl = document.getElementById('war-red-round-2');
-const redWarEl = document.getElementById('war-red-round-1');
-const redSpoilsEl = document.getElementById('red-win-pile');
-const redHandEl = document.getElementById('red-deck');
-const redPlayerNameEl = document.getElementById('red-name-box');
+const redCampEl = $('#war-red-round-2');
+const redWarEl = $('#war-red-round-1');
+const redSpoilsEl = $('#red-win-pile');
+const redHandEl = $('#red-deck');
+const redPlayerNameEl = $('#red-name-box');
 
 //--------------------Functions------------------------
 //---------Search History and localStorage-------------
 //Reloads the saved game state and puts the cards back on the screen where they were when we saved.
 
 //redeclaring Jonathan's global variables because I am cooked and don't know how to test this
-const redCardsHere = document.querySelector("#red-cards-here")
 
-let deck
-let BlackHand = [] //blackdeck
-let RedHand = [] //reddeck
-let wonBlack = []  //spoilsblack
-let wonRed = []  //spoilsred
-let contestedBlack = [] //blkencampment
-let contestedRed = [] //redencampment
-let drawnBlack = [] //battleblack first card was tie, second is new contest
-let drawnRed = [] //// redbattle first card was tie, second is new contest
-let go = false
+// let deck
+// let BlackHand = [] //blackdeck
+// let RedHand = [] //reddeck
+// let wonBlack = []  //spoilsblack
+// let wonRed = []  //spoilsred
+// let contestedBlack = [] //blkencampment
+// let contestedRed = [] //redencampment
+// let drawnBlack = [] //battleblack first card was tie, second is new contest
+// let drawnRed = [] //// redbattle first card was tie, second is new contest
+// let go = false
 
-let b = 0
-let r = 0
-let i = 0
-let winner
-let winnerDeck
+// let b = 0
+// let r = 0
+// let i = 0
+// let winner
+// let winnerDeck
 
 
 function saveGameState(event) {
@@ -75,8 +74,7 @@ console.log('Game Saved.');
 window.location.replace("./index.html");
 }
 
-function loadGameState(event) {
-    event.preventDefault();
+function loadGameState() {
     let storedGameStateString = localStorage.getItem('gameState');
     if (storedGameStateString) {
         let storedGameState = JSON.parse(storedGameStateString);
@@ -147,3 +145,5 @@ function refreshBoard(storedGameState){
 
 saveGameBtn.on('click', saveGameState);
 // viewRulesModalBtn.on('click', saveGameState);
+
+loadGameState()
