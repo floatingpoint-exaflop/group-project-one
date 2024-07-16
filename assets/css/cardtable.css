@@ -3,14 +3,14 @@ html, body, main {
 }
 
 body {
-   background-image: url('./textures/casinocarpet.jpg');
+   background-image: url('./assets/textures/casinocarpet.jpg');
    background-size: cover;
 }
 
 #card-table {
     width: 90%;
     height: 90%;
-    background-image: url('./textures/tablefelt.png');
+    background-image: url('./assets/textures/tablefelt.png');
     background-size: cover;
 }
     #battleground {
