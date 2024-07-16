@@ -1,5 +1,4 @@
 //declare global variables
-const redCardsHere = document.querySelector("#red-cards-here")
 
 let deck
 let BlackHand = []
@@ -99,7 +98,6 @@ async function shuffle(hand){
     resp = await fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/${hand}/shuffle/`)
     data = await resp.json()
     if (data.success === true){
-        console.log(`${hand} shuffled`)
         await listHand(hand)
     } else {
         console.log('error')
@@ -110,10 +108,10 @@ async function shuffle(hand){
 async function listHand(hand){
     const resp = await fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/${hand}/list/`)
     const data = await resp.json()
-    console.log(data)
     if (data.success === true){
         data.piles[hand].cards.forEach(function(element){
             currentHand.push(element.code)
+            console.log(`${hand}'s reinforcements have arrived!!`)
         })
         go = true
         if (data.piles[hand].remaining = 0){
@@ -122,7 +120,6 @@ async function listHand(hand){
     } else {
         console.log('error')
     }
-    console.log(` `)
     // Gary's Rendering
     // const renderableCards = getRenderedCards(data.piles[hand].cards)
     // const container = document.createElement("div")
@@ -155,10 +152,11 @@ function run(){
 //TURN:
 
 async function turn(){
-    console.log('TURN')
-    
-    if (go = true){
+    if (go == true){
         go = false
+        console.log('TURN')
+        console.log('Blacks troops:', BlackHand,);
+        console.log('Reds troops:', RedHand,);
         if (BlackHand.length == 0){
             b == b++
             currentHand = BlackHand
@@ -178,7 +176,7 @@ async function turn(){
         drawnRed.push(RedHand[0])
         RedHand.shift()
 
-        console.log('Challengers:', 'Red,', drawnRed, 'Black,', drawnBlack)
+        console.log('At the front lines:', 'Black,', drawnBlack, 'Red,', drawnRed)
 
         //Compare cards
         let result = compareCards();
@@ -209,7 +207,7 @@ async function turn(){
                 }
                 contestedBlack.push(BlackHand[0])
                 BlackHand.shift()
-                console.log(contestedBlack[0], "Has moved to encampment")
+                console.log(contestedBlack[contestedBlack.length-1], "Has moved to black encampment")
             }
             for (i=0; i < 3; i++){
                 if (RedHand.length === 1 && wonRed.length === 0){
@@ -223,9 +221,12 @@ async function turn(){
                 }
                 contestedRed.push(RedHand[0])
                 RedHand.shift()
-                console.log(contestedRed[0], "Has moved to encampment")
+                console.log(contestedRed[contestedRed.length-1], "Has moved to red encampment")
             }
+            go = true
         }   
+    } else {
+        console.log('slow down there buck-o')
     }
 }
 
@@ -307,16 +308,15 @@ function resolveTurn(){
         winnerDeck.push(element);
     } );
     
-    console.log('Red has', RedHand, ' ready for battle');
-    console.log('Black has', BlackHand, ' ready for battle');
-    console.log('Black has conscripted', wonBlack);
-    console.log('Red has conscripted', wonRed);
-    console.log(BlackHand.length, "cards left for Black");
-    console.log(RedHand.length, "cards left got Red");
     contestedBlack = [];
     contestedRed = [];
     drawnBlack = [];
     drawnRed = [];
+    console.log('spoils dispersed')
+    console.log('Black has conscripted', wonBlack);
+    console.log('Red has conscripted', wonRed);
+    console.log(BlackHand.length, "cards left for Black");
+    console.log(RedHand.length, "cards left got Red");
     go = true
 };
     
@@ -324,7 +324,6 @@ async function reshuffle(fromPile, toPile){
     const resp = await fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/${toPile}/add/?cards=${fromPile}`)
     const data = await resp.json()
     if (data.success === true){
-        console.log("Reshuffling", data)
         await shuffle(toPile)
         fromPile.splice(0, fromPile.length)
     } else {
