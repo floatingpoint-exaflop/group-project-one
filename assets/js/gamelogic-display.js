@@ -21,7 +21,7 @@ const redHandEl = $('#red-deck');
 const redPlayerNameEl = $('#red-name-box');
 
 //declare global variables
-
+let game
 let deck
 let BlackHand = []
 let RedHand = []
@@ -58,16 +58,37 @@ function updatePlayerNames(){
 
 function updateBlackWar(){
     //Black War Pile should be face up and show last card in that array
-    if (drawnBlack.length > 0) {blackWarEl.html(`<img src="./assets/cards/${drawnBlack.pop()}.svg" width="40px"height="60px">`);
-    console.log("Updated Black Player's Top War Card.");
-    } else blackWarEl.html(''); 
+    if (drawnBlack.length > 0) 
+        {if (drawnBlack.pop() === "0S"){
+            blackWarEl.html(`<img src="./assets/cards/10S.svg" width="40px"height="60px">`);}
+        else if (drawnBlack.pop() === "0C"){
+            blackWarEl.html(`<img src="./assets/cards/10C.svg" width="40px"height="60px">`);}
+        else if (drawnBlack.pop() === "0H"){
+            blackWarEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px">`);}
+        else if (drawnBlack.pop() === "0D"){
+            blackWarEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
+        else {blackWarEl.html(`<img src="./assets/cards/${drawnBlack.pop()}.svg" width="40px"height="60px">`);}
+        console.log("Updated Black Player's Top War Card.");
+        // if (
+        // drawnBlack.pop() === "0S" || card === "0C" || card === "0H" || card === "0D"){
+        // return 10
+    } else {blackWarEl.html('');}
 }
 
 function updateRedWar(){
     //Red War Pile should be face up and show last card in that array
-    if (drawnRed.length > 0) {redWarEl.html(`<img src="./assets/cards/${drawnRed.pop()}.svg" width="40px"height="60px">`);
-    console.log("Updated Red Player's Top War Card.");
-    } else redWarEl.html(''); 
+    if (drawnRed.length > 0)
+        {if (drawnRed.pop() === "0S"){
+            redWarEl.html(`<img src="./assets/cards/10S.svg" width="40px"height="60px">`);}
+        else if (drawnRed.pop() === "0C"){
+            redWarEl.html(`<img src="./assets/cards/10C.svg" width="40px"height="60px">`);}
+        else if (drawnRed.pop() === "0H"){
+            redWarEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px">`);}
+        else if (drawnRed.pop() === "0D"){
+            redWarEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
+        else {redWarEl.html(`<img src="./assets/cards/${drawnRed.pop()}.svg" width="40px"height="60px">`);}
+        console.log("Updated Red Player's Top War Card.");}
+     else {redWarEl.html('');}
 }
     
 function updateBlackHand(){
@@ -101,22 +122,49 @@ function updateRedSpoils(){
 function updateBlackCamp() {
     // Clear the existing content of blackCampEl first
     blackCampEl.html('');
-    if (contestedBlack.length > 0) {contestedBlack.forEach(card => {
-        let blackCardCamp = $(`<img src="./assets/cards/${card}.svg" width="40" height="60">`);
-        blackCampEl.append(blackCardCamp);})
-        console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");
-    } else blackCampEl.html('');
+    if (contestedBlack.length > 0) {contestedBlack.forEach(card => 
+        {if (card === "0S"){
+            blackCampEl.html(`<img src="./assets/cards/10S.svg" width="40px"height="60px">`);}
+        else if (card === "0C"){
+            blackCampEl.html(`<img src="./assets/cards/10C.svg" width="40px"height="60px">`);}
+        else if (card === "0H"){
+            blackCampEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px">`);}
+        else if (card === "0D"){
+            blackCampEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
+        else {let blackCardCamp = $(`<img src="./assets/cards/${card}.svg" width="40" height="60">`);
+        blackCampEl.append(blackCardCamp);}
+        console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");})}
+    else blackCampEl.html('');
 }
 
+// function updateRedCamp() {
+//     // Clear the existing content of redCampEl first
+//     redCampEl.html('');
+//     if (contestedRed.length > 0) {contestedRed.forEach(card => {
+//         let redCardCamp = $(`<img src="./assets/cards/${card}.svg" width="40" height="60">`);
+//         console.log("Updated Red Player's Camp Cards. These are at stake if Black wins this War!");
+//         redCampEl.append(redCardCamp);})
+//     } else redCampEl.html('');
+// }
+
 function updateRedCamp() {
-    // Clear the existing content of redCampEl first
+    // Clear the existing content of blackCampEl first
     redCampEl.html('');
-    if (contestedRed.length > 0) {contestedRed.forEach(card => {
-        let redCardCamp = $(`<img src="./assets/cards/${card}.svg" width="40" height="60">`);
-        console.log("Updated Red Player's Camp Cards. These are at stake if Black wins this War!");
-        redCampEl.append(redCardCamp);})
-    } else redCampEl.html('');
+    if (contestedRed.length > 0) {contestedRed.forEach(card => 
+        {if (card === "0S"){
+            redCampEl.html(`<img src="./assets/cards/10S.svg" width="40px"height="60px">`);}
+        else if (card === "0C"){
+            redCampEl.html(`<img src="./assets/cards/10C.svg" width="40px"height="60px">`);}
+        else if (card === "0H"){
+            redCampEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px">`);}
+        else if (card === "0D"){
+            redCampEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
+        else {let redCardCamp = $(`<img src="./assets/cards/${card}.svg" width="40" height="60">`);
+        redCampEl.append(redCardCamp);}
+        console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");})}
+    else redCampEl.html('');
 }
+
 
 function updateAllCards() {
     updateBlackHand()
@@ -163,7 +211,7 @@ async function buildPiles(){
         let pile = 'Black'.concat(b)
         console.log("Black built", dataB)
         await shuffle(pile)
-        
+        updateBlackHand()
     } else {
         console.log('error')
     }
@@ -174,6 +222,7 @@ async function buildPiles(){
         let pile = 'Red'.concat(r)
         console.log("Red built", dataR)
         await shuffle(pile)
+        updateRedHand()
     } else {
         console.log('error')
     }
@@ -194,7 +243,7 @@ async function statusCheck(){
         currentHand = BlackHand
         let pile = 'Black'.concat(b)
         await reshuffle(wonBlack, pile)
-    }
+    } updateAllCards()
     if (RedHand.length == 0 && wonRed.length == 0){
         winner = 'Black'
         endGame();
@@ -203,7 +252,7 @@ async function statusCheck(){
         currentHand = RedHand
         let pile = 'Red'.concat(r)
         await reshuffle(wonRed, pile)
-    }
+    } updateAllCards()
 }
 
 //Reshuffle won cards into main hand
@@ -215,7 +264,11 @@ async function reshuffle(fromPile, toPile){
         fromPile.splice(0, fromPile.length)
     } else {
         console.log('error')
-    }
+    } 
+    updateBlackSpoils();
+    updateBlackHand();
+    updateRedSpoils();
+    updateRedHand();
 };
 
 //Shuffle Empty Hand
@@ -226,7 +279,8 @@ async function shuffle(hand){
         await listHand(hand)
     } else {
         console.log('error')
-    }
+    }   updateBlackHand();
+        updateRedHand();
 }
 
 //List and Update Arrays
@@ -274,7 +328,7 @@ function run(){
 
 //TURN:
 async function turn(){
-    if (go == true && game == ''){
+    if (go == true && !game){
         go = false
         console.log('TURN')
         console.log('Blacks troops:', BlackHand,);
@@ -463,41 +517,41 @@ window.location.replace("./index.html");
 
 
 function loadGameState() {
+    let storedGameState
     let storedGameStateString = localStorage.getItem('gameState');
-    if (storedGameStateString) {
-        let storedGameState = JSON.parse(storedGameStateString);
-        console.log(storedGameState);}
-        else {
-            setUp();
-            let redPlayerName = "Erik the Red";   
-            let blackPlayerName = "Black Bart";
-        ;}
-        if (storedGameState) {
-            let redPlayerName = storedGameState.redPlayerName;   
-            let blackPlayerName = storedGameState.blackPlayerName;
-            let deck = storedGameState.deck;
-            let BlackHand = storedGameState.BlackHand;
-            let RedHand = storedGameState.RedHand;
-            let wonBlack = storedGameState.wonBlack;
-            let wonRed = storedGameState.wonRed;
-            let contestedBlack = storedGameState;contestedBlack;
-            let contestedRed = storedGameState. contestedRed;
-            let drawnBlack = storedGameState.drawnBlack;
-            let drawnRed = storedGameState.drawnRed;
-            let currentHand = storedGameState.currentHand;
-            let go = storedGameState.go;
-            let b = storedGameState.b;
-            let r = storedGameState.r;
-            let i = storedGameState.i;
-            let winner = storedGameState.winner;
-            let winnerDeck = storedGameState.winnerDeck;
-            updateAllCards();
-        }
+    console.log(storedGameStateString)
+
+    if( !storedGameStateString ){
+        setUp();
+        redPlayerName = "Erik the Red";   
+        blackPlayerName = "Black Bart";
+    } else {
+        storedGameState = JSON.parse(storedGameStateString);
+        redPlayerName = storedGameState.redPlayerName;   
+        blackPlayerName = storedGameState.blackPlayerName;
+        deck = storedGameState.deck;
+        BlackHand = storedGameState.BlackHand;
+        RedHand = storedGameState.RedHand;
+        wonBlack = storedGameState.wonBlack;
+        wonRed = storedGameState.wonRed;
+        contestedBlack = storedGameState.contestedBlack;
+        contestedRed = storedGameState.contestedRed;
+        drawnBlack = storedGameState.drawnBlack;
+        drawnRed = storedGameState.drawnRed;
+        currentHand = storedGameState.currentHand;
+        go = storedGameState.go;
+        b = storedGameState.b;
+        r = storedGameState.r;
+        i = storedGameState.i;
+        winner = storedGameState.winner;
+        winnerDeck = storedGameState.winnerDeck;
+        updateAllCards();
     }
+}
 
 
 // loadGameState()
-setUp()
+loadGameState()
 // updatePlayerNames()
 // updateAllCards()
 
