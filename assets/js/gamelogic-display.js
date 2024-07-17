@@ -304,23 +304,27 @@ async function buildPiles(){
 //Check for Shuffle/Gameover
 async function statusCheck(){
     if (BlackHand.length == 0 && wonBlack.length == 0){
+        blackHandEl.html =('')
         winner = 'Red'
         endGame();
     } else if (BlackHand.length == 0){
+        blackHandEl.html =('')
         b == b++
         currentHand = BlackHand
         let pile = 'Black'.concat(b)
         await reshuffle(wonBlack, pile)
-    } updateRedHand()
+    } 
     if (RedHand.length == 0 && wonRed.length == 0){
+        redHandEl.html =('')
         winner = 'Black'
         endGame();
     } else if (RedHand.length == 0){
+        redHandEl.html =('')
         r == r++
         currentHand = RedHand
         let pile = 'Red'.concat(r)
         await reshuffle(wonRed, pile)
-    } updateBlackHand()
+    } 
 }
 
 //Reshuffle won cards into main hand
@@ -388,15 +392,17 @@ async function turn(){
         console.log('Blacks troops:', BlackHand,);
         console.log('Reds troops:', RedHand,);
         //Draw Cards
-        drawnBlack.push(BlackHand[0])
-        BlackHand.shift()
         drawnRed.push(RedHand[0])
         RedHand.shift()
-        updateBlackWar()
-        updateBlackHand()
         updateRedWar()
         updateRedHand()
-        //TIME OUT FUNCTION GOES HERE, GIVE A COUPLE SECONDS SO WE CAN SEE THE WAR!
+        await new Promise((resolve) => {
+            setTimeout(resolve, 500);
+          })
+        drawnBlack.push(BlackHand[0])
+        BlackHand.shift()
+        updateBlackWar()
+        updateBlackHand()
         console.log('At the front lines:', 'Black,', drawnBlack, 'Red,', drawnRed)
         await new Promise((resolve) => {
                 setTimeout(resolve, 1000);
@@ -427,6 +433,9 @@ async function turn(){
                 BlackHand.shift()
                 updateBlackHand()
                 console.log(contestedBlack[contestedBlack.length-1], "Has moved to Black encampment")
+                await new Promise((resolve) => {
+                    setTimeout(resolve, 333);
+                  })
                 }
                 if (RedHand.length === 1 && wonRed.length === 0){
                     console.log('Reds champion: ', RedHand[0])
@@ -436,6 +445,9 @@ async function turn(){
                 RedHand.shift()
                 updateRedHand()
                 console.log(contestedRed[contestedRed.length-1], "Has moved to Red encampment")
+                await new Promise((resolve) => {
+                    setTimeout(resolve, 333);
+                  })
                 }
             }
         }   
@@ -510,7 +522,7 @@ function convertCard2Value(card){
 
 //Call API to update pile lists
 function resolveTurn(){
-   
+    
     contestedBlack.forEach(function(element){
         winnerDeck.push(element);
     } );
