@@ -98,8 +98,6 @@ function updateBlackHand(){
     //Black Hand Pile should be face down and always show a cardback
     if (BlackHand.length > 0) {blackHandEl.html(`<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px">`);
     console.log("Updated Black Player's Hand Cards (These are hidden!).");
-    cardNoise.load();
-    cardNoise.play();
     } else {blackHandEl.html('');}
 }
 
@@ -107,8 +105,6 @@ function updateRedHand(){
     //Red Hand Pile should be face down and always show a cardback
     if (RedHand.length > 0) {redHandEl.html(`<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px">`);
     console.log("Updated Red Player's Hand Cards (These are hidden!).");
-    cardNoise.load();
-    cardNoise.play();
     } else {redCampEl.html('');}
 }
 
@@ -445,7 +441,7 @@ async function turn(){
                 updateBlackHand();
                 cardNoise.play();
                 await new Promise((resolve) => {
-                    setTimeout(resolve, 333);
+                    setTimeout(resolve, 500);
                   })
                 console.log(contestedBlack[contestedBlack.length-1], "Has moved to Black encampment")
                 }
@@ -459,7 +455,7 @@ async function turn(){
                 updateRedHand()
                 cardNoise.play();
                 await new Promise((resolve) => {
-                    setTimeout(resolve, 333);
+                    setTimeout(resolve, 500);
                   })
                 console.log(contestedRed[contestedRed.length-1], "Has moved to Red encampment")
                 }
