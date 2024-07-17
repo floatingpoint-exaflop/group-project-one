@@ -15,6 +15,7 @@ let b = 0
 let r = 0
 let winner
 let winnerDeck
+let game = ''
 
 
 //GARY'S RENDER FUNCTIONS
@@ -39,9 +40,9 @@ let winnerDeck
 
 
 //BEGIN SETUP:
-
 setUp()
 
+//Get deck from API
 async function setUp(){
     const resp = await fetch('https://deckofcardsapi.com/api/deck/new/')
     const data = await resp.json()
@@ -66,7 +67,7 @@ async function emptyDeck(){
     }
 }
 
-//build player piles of all Red and all Black cards. Call shuffle functions
+//Build player piles of all Red and all Black cards. Call shuffle functions.
 async function buildPiles(){
     const respB = await fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/Black0/add/?cards=AC,2C,3C,4C,5C,6C,7C,8C,9C,0C,JC,QC,KC,AS,2S,3S,4S,5S,6S,7S,8S,9S,0S,JS,QS,KS`)
     const dataB = await respB.json()
@@ -93,7 +94,44 @@ async function buildPiles(){
 
 //END SETUP:
 
-// Shuffle
+
+// SHUFFLE FUNCTIONS:
+
+//Check for Shuffle/Gameover
+async function statusCheck(){
+    if (BlackHand.length == 0 && wonBlack.length == 0){
+        winner = 'Red'
+        endGame();
+    } else if (BlackHand.length == 0){
+        b == b++
+        currentHand = BlackHand
+        let pile = 'Black'.concat(b)
+        await reshuffle(wonBlack, pile)
+    }
+    if (RedHand.length == 0 && wonRed.length == 0){
+        winner = 'Black'
+        endGame();
+    } else if (RedHand.length == 0){
+        r == r++
+        currentHand = RedHand
+        let pile = 'Red'.concat(r)
+        await reshuffle(wonRed, pile)
+    }
+}
+
+//Reshuffle won cards into main hand
+async function reshuffle(fromPile, toPile){
+    const resp = await fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/${toPile}/add/?cards=${fromPile}`)
+    const data = await resp.json()
+    if (data.success === true){
+        await shuffle(toPile)
+        fromPile.splice(0, fromPile.length)
+    } else {
+        console.log('error')
+    }
+};
+
+//Shuffle Empty Hand
 async function shuffle(hand){
     resp = await fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/${hand}/shuffle/`)
     data = await resp.json()
@@ -104,7 +142,7 @@ async function shuffle(hand){
     }
 }
 
-//List and update arrays
+//List and Update Arrays
 async function listHand(hand){
     const resp = await fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/${hand}/list/`)
     const data = await resp.json()
@@ -134,7 +172,9 @@ async function listHand(hand){
     // redCardsHere.appendChild(container)
 }
 
+//END OF SHUFFLE FUNCTIONS
 
+//GAMEPLAY
 function run(){
     if (RedHand.length === 26 && BlackHand.length === 26){
         console.log('ready to play!')
@@ -145,30 +185,13 @@ function run(){
     
 }
 
-
-//END OF SETUP:
-
 //TURN:
-
 async function turn(){
-    if (go == true){
+    if (go == true && game == ''){
         go = false
         console.log('TURN')
         console.log('Blacks troops:', BlackHand,);
         console.log('Reds troops:', RedHand,);
-        if (BlackHand.length == 0){
-            b == b++
-            currentHand = BlackHand
-            let pile = 'Black'.concat(b)
-            await reshuffle(wonBlack, pile)
-            
-        }
-        if (RedHand.length == 0){
-            r == r++
-            currentHand = RedHand
-            let pile = 'Red'.concat(r)
-            await reshuffle(wonRed, pile)
-        }
         //Draw Cards
         drawnBlack.push(BlackHand[0])
         BlackHand.shift()
@@ -190,40 +213,28 @@ async function turn(){
             winnerDeck = wonRed;
             resolveTurn();
         } else if (result === 'Tie'){
-            // if(BlackHand.length < i+3)
-            //     reshuffle()
             winner = 'Tie';
             console.log("Tie! It's a War!")
             for (i=0; i < 3; i++){
+                await statusCheck()
                 if (BlackHand.length === 1 && wonBlack.length === 0){
-                    break;
-                } else if (BlackHand.length === 0) {
-                    b == b++
-                currentHand = BlackHand
-                let pile = 'Black'.concat(b)
-                await reshuffle(wonBlack, pile)
-                    
-                }
+                    console.log('Blacks champion: ', BlackHand[0])
+                } else { 
                 contestedBlack.push(BlackHand[0])
                 BlackHand.shift()
-                console.log(contestedBlack[contestedBlack.length-1], "Has moved to black encampment")
-            }
-            for (i=0; i < 3; i++){
-                if (RedHand.length === 1 && wonRed.length === 0){
-                    break;
-                } else if (RedHand.length === 0) {
-                    r == r++
-                    currentHand = RedHand
-                    let pile = 'Red'.concat(r)
-                    await reshuffle(wonRed, pile)
-                    
+                console.log(contestedBlack[contestedBlack.length-1], "Has moved to Black encampment")
                 }
+                if (RedHand.length === 1 && wonRed.length === 0){
+                    console.log('Reds champion: ', RedHand[0])
+                } else { 
                 contestedRed.push(RedHand[0])
                 RedHand.shift()
-                console.log(contestedRed[contestedRed.length-1], "Has moved to red encampment")
+                console.log(contestedRed[contestedRed.length-1], "Has moved to Red encampment")
+                }
             }
-            go = true
         }   
+        await statusCheck()
+        go = true
     } else {
         console.log('slow down there buck-o')
     }
@@ -316,21 +327,12 @@ function resolveTurn(){
     console.log('Red has conscripted', wonRed);
     console.log(BlackHand.length, "cards left for Black");
     console.log(RedHand.length, "cards left got Red");
-    go = true
-};
-    
-async function reshuffle(fromPile, toPile){
-    const resp = await fetch(`https://deckofcardsapi.com/api/deck/${deck}/pile/${toPile}/add/?cards=${fromPile}`)
-    const data = await resp.json()
-    if (data.success === true){
-        await shuffle(toPile)
-        fromPile.splice(0, fromPile.length)
-    } else {
-        console.log('error')
-    }
 };
 
-
+function endGame(){
+    console.log(`Game Over: ${winner} wins!!`)
+    game = 'over'
+}
 // // function checkWin(){
 
 // redCardsHere.addEventListener("click", function(event){
