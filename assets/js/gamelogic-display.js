@@ -137,16 +137,6 @@ function updateBlackCamp() {
     else blackCampEl.html('');
 }
 
-// function updateRedCamp() {
-//     // Clear the existing content of redCampEl first
-//     redCampEl.html('');
-//     if (contestedRed.length > 0) {contestedRed.forEach(card => {
-//         let redCardCamp = $(`<img src="./assets/cards/${card}.svg" width="40" height="60">`);
-//         console.log("Updated Red Player's Camp Cards. These are at stake if Black wins this War!");
-//         redCampEl.append(redCardCamp);})
-//     } else redCampEl.html('');
-// }
-
 function updateRedCamp() {
     // Clear the existing content of blackCampEl first
     redCampEl.html('');
@@ -164,7 +154,6 @@ function updateRedCamp() {
         console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");})}
     else redCampEl.html('');
 }
-
 
 function updateAllCards() {
     updateBlackHand()
@@ -243,7 +232,7 @@ async function statusCheck(){
         currentHand = BlackHand
         let pile = 'Black'.concat(b)
         await reshuffle(wonBlack, pile)
-    } updateAllCards()
+    } updateRedHand()
     if (RedHand.length == 0 && wonRed.length == 0){
         winner = 'Black'
         endGame();
@@ -252,7 +241,7 @@ async function statusCheck(){
         currentHand = RedHand
         let pile = 'Red'.concat(r)
         await reshuffle(wonRed, pile)
-    } updateAllCards()
+    } updateBlackHand()
 }
 
 //Reshuffle won cards into main hand
@@ -279,8 +268,7 @@ async function shuffle(hand){
         await listHand(hand)
     } else {
         console.log('error')
-    }   updateBlackHand();
-        updateRedHand();
+    }
 }
 
 //List and Update Arrays
@@ -298,19 +286,6 @@ async function listHand(hand){
     } else {
         console.log('error')
     }
-    // Gary's Rendering
-    // const renderableCards = getRenderedCards(data.piles[hand].cards)
-    // const container = document.createElement("div")
-    // container.setAttribute("class", "hand hhand-compact");
-    // renderableCards.forEach( function(card){
-    //     const cardImg = document.createElement("img")
-    //     cardImg.setAttribute("class", "card")
-    //     cardImg.setAttribute("data-value", card.value)
-    //     cardImg.setAttribute("data-suit", card.suit)
-    //     cardImg.setAttribute("src", card.imgfile)
-    //     container.appendChild(cardImg)
-    // })
-    // redCardsHere.appendChild(container)
 }
 
 //END OF SHUFFLE FUNCTIONS
@@ -338,7 +313,11 @@ async function turn(){
         BlackHand.shift()
         drawnRed.push(RedHand[0])
         RedHand.shift()
-
+        updateBlackWar()
+        updateBlackHand()
+        updateRedWar()
+        updateRedHand()
+        //TIME OUT FUNCTION GOES HERE, GIVE A COUPLE SECONDS SO WE CAN SEE THE WAR!
         console.log('At the front lines:', 'Black,', drawnBlack, 'Red,', drawnRed)
 
         //Compare cards
@@ -362,14 +341,18 @@ async function turn(){
                     console.log('Blacks champion: ', BlackHand[0])
                 } else { 
                 contestedBlack.push(BlackHand[0])
+                updateBlackCamp()
                 BlackHand.shift()
+                updateBlackHand()
                 console.log(contestedBlack[contestedBlack.length-1], "Has moved to Black encampment")
                 }
                 if (RedHand.length === 1 && wonRed.length === 0){
                     console.log('Reds champion: ', RedHand[0])
                 } else { 
                 contestedRed.push(RedHand[0])
+                updateRedCamp()
                 RedHand.shift()
+                updateRedHand()
                 console.log(contestedRed[contestedRed.length-1], "Has moved to Red encampment")
                 }
             }
@@ -463,6 +446,7 @@ function resolveTurn(){
     contestedRed = [];
     drawnBlack = [];
     drawnRed = [];
+    updateAllCards();
     console.log('spoils dispersed')
     console.log('Black has conscripted', wonBlack);
     console.log('Red has conscripted', wonRed);
