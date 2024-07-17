@@ -21,7 +21,7 @@ const redHandEl = $('#red-deck');
 const redPlayerNameEl = $('#red-name-box');
 
 //declare global variables
-let game
+
 let deck
 let BlackHand = []
 let RedHand = []
@@ -33,6 +33,7 @@ let drawnBlack = []
 let drawnRed = []
 let currentHand
 let go = false
+let game = ''
 let b = 0
 let r = 0
 let winner
@@ -59,38 +60,37 @@ function updatePlayerNames(){
 function updateBlackWar(){
     //Black War Pile should be face up and show last card in that array
     if (drawnBlack.length > 0) 
-        {if (drawnBlack.pop() === "0S"){
+        {if (drawnBlack[drawnBlack.length-1] === "0S"){
             blackWarEl.html(`<img src="./assets/cards/10S.svg" width="40px"height="60px">`);}
-        else if (drawnBlack.pop() === "0C"){
+        else if (drawnBlack[drawnBlack.length-1] === "0C"){
             blackWarEl.html(`<img src="./assets/cards/10C.svg" width="40px"height="60px">`);}
-        else if (drawnBlack.pop() === "0H"){
+        else if (drawnBlack[drawnBlack.length-1] === "0H"){
             blackWarEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px">`);}
-        else if (drawnBlack.pop() === "0D"){
+        else if (drawnBlack[drawnBlack.length-1] === "0D"){
             blackWarEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
         else {blackWarEl.html(`<img src="./assets/cards/${drawnBlack.pop()}.svg" width="40px"height="60px">`);}
         console.log("Updated Black Player's Top War Card.");
-        // if (
-        // drawnBlack.pop() === "0S" || card === "0C" || card === "0H" || card === "0D"){
-        // return 10
     } else {blackWarEl.html('');}
 }
 
 function updateRedWar(){
     //Red War Pile should be face up and show last card in that array
     if (drawnRed.length > 0)
-        {if (drawnRed.pop() === "0S"){
+        {if (drawnRed[drawnRed.length-1] === "0S"){
             redWarEl.html(`<img src="./assets/cards/10S.svg" width="40px"height="60px">`);}
-        else if (drawnRed.pop() === "0C"){
+        else if (drawnRed[drawnRed.length-1] === "0C"){
             redWarEl.html(`<img src="./assets/cards/10C.svg" width="40px"height="60px">`);}
-        else if (drawnRed.pop() === "0H"){
+        else if (drawnRed[drawnRed.length-1] === "0H"){
             redWarEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px">`);}
-        else if (drawnRed.pop() === "0D"){
+        else if (drawnRed[drawnRed.length-1] === "0D"){
             redWarEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
         else {redWarEl.html(`<img src="./assets/cards/${drawnRed.pop()}.svg" width="40px"height="60px">`);}
         console.log("Updated Red Player's Top War Card.");}
      else {redWarEl.html('');}
 }
-    
+
+
+
 function updateBlackHand(){
     //Black Hand Pile should be face down and always show a cardback
     if (BlackHand.length > 0) {blackHandEl.html(`<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px">`);
@@ -502,6 +502,7 @@ function saveGameState(event) {
         b: b,
         r: r,
         i: 0,
+        game: game,
         winner: winner,
         winnerDeck: winnerDeck,
         blackPlayerName: blackPlayerNameEl.val(''),
@@ -543,6 +544,7 @@ function loadGameState() {
         b = storedGameState.b;
         r = storedGameState.r;
         i = storedGameState.i;
+        game = game;
         winner = storedGameState.winner;
         winnerDeck = storedGameState.winnerDeck;
         updateAllCards();
@@ -562,4 +564,4 @@ loadGameState()
 //     if( event.target.matches('.card') ){
 //         console.log(`card clicked: ${event.target.getAttribute("data-value")} of ${event.target.getAttribute("data-suit")}`)
 //     }
-// })
+// 
