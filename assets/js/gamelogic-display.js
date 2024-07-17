@@ -71,8 +71,7 @@ function updateBlackWar(){
             blackWarEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
         else {blackWarEl.html(`<img src="./assets/cards/${drawnBlack[drawnBlack.length-1]}.svg" width="40px"height="60px">`);}
         console.log("Updated Black Player's Top War Card.");
-        cardNoise.load();
-        cardNoise.play();
+        
     } else {blackWarEl.html('');}
 }
 
@@ -89,8 +88,7 @@ function updateRedWar(){
             redWarEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
         else {redWarEl.html(`<img src="./assets/cards/${drawnRed[drawnRed.length-1]}.svg" width="40px"height="60px">`);}
         console.log("Updated Red Player's Top War Card.");
-        cardNoise.load();
-        cardNoise.play();
+        
     } else {redWarEl.html('');}
 }
 
@@ -100,8 +98,6 @@ function updateBlackHand(){
     //Black Hand Pile should be face down and always show a cardback
     if (BlackHand.length > 0) {blackHandEl.html(`<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px">`);
     console.log("Updated Black Player's Hand Cards (These are hidden!).");
-    cardNoise.load();
-    cardNoise.play();
     } else {blackHandEl.html('');}
 }
 
@@ -109,8 +105,6 @@ function updateRedHand(){
     //Red Hand Pile should be face down and always show a cardback
     if (RedHand.length > 0) {redHandEl.html(`<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px">`);
     console.log("Updated Red Player's Hand Cards (These are hidden!).");
-    cardNoise.load();
-    cardNoise.play();
     } else {redCampEl.html('');}
 }
 
@@ -175,8 +169,7 @@ function updateBlackSpoils() {
             blackSpoilsEl.append(lastBlack);
         }
         console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");
-        cardNoise.load();
-        cardNoise.play();}
+        }
     else {blackSpoilsEl.html('');}
 }
 
@@ -197,8 +190,7 @@ function updateRedSpoils() {
             redSpoilsEl.append(lastRed);
         }
         console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");
-        cardNoise.load();
-        cardNoise.play();}
+        }
     else {redSpoilsEl.html('');}
 }
 
@@ -220,8 +212,7 @@ function updateBlackCamp() {
         else {blackCardCamp = $(`<img src="./assets/cards/${card}.svg" width="40" height="60">`);}
         blackCampEl.append(blackCardCamp);
         console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");
-        cardNoise.load();
-        cardNoise.play();})}
+        })}
     else blackCampEl.html('');
 }
 
@@ -241,8 +232,7 @@ function updateRedCamp() {
         else {redCardCamp = $(`<img src="./assets/cards/${card}.svg" width="40" height="60">`);}
         redCampEl.append(redCardCamp);
         console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");
-        cardNoise.load();
-        cardNoise.play();})}
+        })}
     else redCampEl.html('');
 }
 
@@ -344,8 +334,6 @@ async function reshuffle(fromPile, toPile){
     if (data.success === true){
         await shuffle(toPile)
         fromPile.splice(0, fromPile.length)
-        shuffleNoise.load();
-        shuffleNoise.play();
     } else {
         console.log('error')
     } 
@@ -406,17 +394,21 @@ async function turn(){
         console.log('Blacks troops:', BlackHand,);
         console.log('Reds troops:', RedHand,);
         //Draw Cards
+        cardNoise.load();
         drawnRed.push(RedHand[0])
         RedHand.shift()
         updateRedWar()
         updateRedHand()
+        cardNoise.play();
         await new Promise((resolve) => {
             setTimeout(resolve, 500);
           })
+        cardNoise.load();
         drawnBlack.push(BlackHand[0])
         BlackHand.shift()
         updateBlackWar()
         updateBlackHand()
+        cardNoise.play()
         await new Promise((resolve) => {
                 setTimeout(resolve, 1000);
               })
@@ -442,24 +434,28 @@ async function turn(){
                 if (BlackHand.length === 1 && wonBlack.length === 0){
                     console.log('Blacks champion: ', BlackHand[0])
                 } else { 
-                contestedBlack.push(BlackHand[0])
-                updateBlackCamp()
-                BlackHand.shift()
-                updateBlackHand()
+                cardNoise.load();
+                contestedBlack.push(BlackHand[0]);
+                updateBlackCamp();
+                BlackHand.shift();
+                updateBlackHand();
+                cardNoise.play();
                 await new Promise((resolve) => {
-                    setTimeout(resolve, 333);
+                    setTimeout(resolve, 500);
                   })
                 console.log(contestedBlack[contestedBlack.length-1], "Has moved to Black encampment")
                 }
                 if (RedHand.length === 1 && wonRed.length === 0){
                     console.log('Reds champion: ', RedHand[0])
                 } else { 
+                cardNoise.load();
                 contestedRed.push(RedHand[0])
                 updateRedCamp()
                 RedHand.shift()
                 updateRedHand()
+                cardNoise.play();
                 await new Promise((resolve) => {
-                    setTimeout(resolve, 333);
+                    setTimeout(resolve, 500);
                   })
                 console.log(contestedRed[contestedRed.length-1], "Has moved to Red encampment")
                 }
@@ -536,7 +532,7 @@ function convertCard2Value(card){
 
 //Call API to update pile lists
 function resolveTurn(){
-   
+    cardNoise.load();
     contestedBlack.forEach(function(element){
         winnerDeck.push(element);
     } );
@@ -549,7 +545,7 @@ function resolveTurn(){
     drawnRed.forEach(function(element){
         winnerDeck.push(element);
     } );
-    
+    cardNoise.play();
     contestedBlack = [];
     contestedRed = [];
     drawnBlack = [];
