@@ -415,6 +415,9 @@ async function turn(){
         updateRedHand()
         //TIME OUT FUNCTION GOES HERE, GIVE A COUPLE SECONDS SO WE CAN SEE THE WAR!
         console.log('At the front lines:', 'Black,', drawnBlack, 'Red,', drawnRed)
+        await new Promise((resolve) => {
+                setTimeout(resolve, 1000);
+              })
 
         //Compare cards
         let result = compareCards();
