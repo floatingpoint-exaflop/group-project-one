@@ -73,7 +73,7 @@
                 <div class="modal-header">
                 <h1 class="modal-title fs-5" id="formModalLabel">🪖Rules of Engagement🎖️</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+            </div>
             <div class="modal-body" id="modal-body">
                 <span class="col-md-6">The game is played in iterative rounds/turns, with both players making their move simultaneously each round/turn.<br><br>Battle begins: Players simultaneously flip and reveal the top card of their Hand (by clicking the Hand), which appears in the center Battlefield section.<br><br>The player with the higher card rank wins the Battle, and takes both played cards, placing them face down on their 'Spoils of War' stack.<br><br>If the cards in the Battle are the same rank, the players enter a War!<br><br>If War Breaks Out:<br><br>Both players get the next three cards from their pile face down and place them in their respective Encampments, next to the Battlefield. They each then draw a fourth card and place it face up on their Battlefield stack, to fight once again.<br><br>The player with the higher face-up card on their side of the Battlefield of course wins the War round and adds all the cards on the table to the bottom of their Hand pile. They take both piles, placing them face down on their 'Spoils of War' stack.<br><br>If players' new face-up Battlefield cards are the same rank, the War continues (repeat War Step 1)! This mean the longer your current War drags on, the bigger the gains for the winner (and the more catastrophic the losses for their foe)!<br><br>When a player runs out of cards in their Hand pile, they shuffle their Spoils of War back into it so they can keep playing.<br><br>The game continues in this fashion until a player wins via a higher card rank, or until a player runs out of cards COMPLETELY (i.e. no cards in Hand pile, and no remaining cards in the Spoils of War; player can turn their last card face up, and these count as their played card in the war.).<br><br>If a player runs out of cards COMPLETELY in the middle of a War, they LOSE THE GAME entirely.<br><br>If a player wins a War without either player running out of cards, the game continues from Battle Begins.<br><br>The game as a whole continues until one player wins all the cards from the table. The player who took all the cards is the winner!
                 </span>
@@ -82,8 +82,38 @@
                 <div class="modal-footer justify-content-center">
                 </div>          
             </div>
+        </div>
+        <div class="modal fade" id="lose-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">🏳️GAME OVER🏳️</h1>
+                    </div>
+                    <div class="modal-body">
+                        You lose.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="leaveGame()">Steel Resolve?</button>
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
+        <div class="modal fade" id="win-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">🎖️GAME OVER🎖️</h1>
+                    </div>
+                    <div class="modal-body">
+                        You win!
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="leaveGame()">March On?</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/speaker.js"></script>
