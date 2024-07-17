@@ -11,17 +11,17 @@
     <link rel="shortcut icon" href="./assets/favicon/favicon.ico" type="image/x-icon">
     <title>This Means War!</title>
 </head>
-<body class="d-flex flex-column min-vh-100">
-    <main class="border column border-warning border-5 w-100 min-vh-100 d-flex justify-content-center align-items-center">
+<body class="d-flex flex-column">
+    <main class="border column border-warning d-flex justify-content-center align-items-center">
         <div id="card-table" class="column border border-5">
             <div id="black-space" class="align-items-center border border-primary border-5">
-                <div id="computer-name-box" class="border border-primary border-5 d-flex justify-content-center"><p>Computer</p></div>
-                <div id="black-cards" class="row border border-2">
-                    <div id="black-deck" class=" col-sm-3 border border-primary border-5 d-flex justify-content-center">
-                        <p>DECK GOES HERE</p>
-                    </div>
-                    <div id="black-win-pile" class="col-sm-3 border border-primary border-5 d-flex justify-content-center">
+                <div id="computer-name-box" class="d-flex justify-content-center align-content-center"><p>Computer</p></div>
+                <div id="black-cards" class="row">
+                    <div id="black-win-pile" class="col-sm-3 d-flex justify-content-center">
                         <p>WINPILE GOES HERE</p>
+                    </div>
+                    <div id="black-deck" class="col-sm-3 d-flex justify-content-center">
+                        <p>DECK GOES HERE</p>
                     </div>
                 </div>
             </div>
@@ -40,26 +40,26 @@
             </div>
 
             <div id="red-space" class="align-items-center border border-primary border-5">
-                <div id="red-cards" class="row border border-2">
-                    <div id="red-deck" class="col-sm-3 border border-primary border-5 d-flex justify-content-center">
+                <div id="red-cards" class="row">
+                    <div id="red-deck" class="col-sm-3 d-flex justify-content-center align-items-center">
                         <p>DECK GOES HERE</p>
                     </div>
-                    <div id="red-win-pile" class="col-sm-3 border border-primary border-5 d-flex justify-content-center">
+                    <div id="red-win-pile" class="col-sm-3 d-flex justify-content-center align-items-center">
                         <p>WINPILE GOES HERE</p>
                     </div>
                 </div>
-                <div id="red-name-box" class="border border-primary border-5 d-flex justify-content-center"><p>red</p></div>
+                <div id="red-name-box" class="d-flex justify-content-center align-content-center align-items-center"><p>Active Player</p></div>
             </div>
         </div>
         
     </main>
-    <section class="container row">
-        <div class="text-center mb-5">
-            <button onclick="saveGameState()" class="btn btn-success" id="save-game-button">Save & Exit Game</button>
-            <button onclick="run()" class="btn btn-warning" id="start-game-button">Start Game</button>
-            <button onclick="turn()" class="btn btn-warning" id="test-turn-button">Take Turn</button>
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal">Review Game Rules</button>
-            <span id="🔊" class="btn btn-success">🔊
+    <section class="container-fluid row">
+        <div class="text-center m-2 p-2">
+            <button onclick="saveGameState()" class="btn btn-success m-1 p-1" id="save-game-button">Save & Exit Game</button>
+            <button onclick="run()" class="btn btn-warning m-1 p-1" id="start-game-button">Start Game</button>
+            <button onclick="turn()" class="btn btn-warning m-1 p-1" id="test-turn-button">Take Turn</button>
+            <button class="btn btn-success m-1 p-1" data-bs-toggle="modal" data-bs-target="#formModal">Review Game Rules</button>
+            <span id="🔊" class="btn btn-success m-1 p-1">🔊
                 <audio id="disco-ultralounge" loop>
                     <source src="./assets/disco-ultralounge-kevin-macleod.mp3" type="audio/mpeg">
                     <source src="./assets/disco-ultralounge-kevin-macleod.mp3" type="audio/ogg">

@@ -23,5 +23,5 @@ function handleFormSubmit(e){
 
 // // Redirect to game page
 function redirect(){
-  window.location.href="./cardtable.html";
+  window.location.href="./game-test-table.html";
 }
