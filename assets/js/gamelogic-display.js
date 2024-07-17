@@ -3,7 +3,8 @@ const startGameBtn = $('#start-game-button').css('display', 'inline');
 const saveGameBtn = $('#save-game-button').css('display', 'none');
 const testGameBtn = $('#test-turn-button').css('display', 'none');
 const musicBtn = $('#🔊');
-const viewRulesModalBtn = $('#computer-name-box');
+const youLose = $('#lose-modal');
+const youWin = $('#win-modal');
 
 //------Black Player's Card Location DOM Elements------
 const blackPlayerNameEl = $('#computer-name-box');
@@ -62,14 +63,14 @@ function updateBlackWar(){
     //Black War Pile should be face up and show last card in that array
     if (drawnBlack.length > 0) 
         {if (drawnBlack[drawnBlack.length-1] === "0S"){
-            blackWarEl.html(`<img src="./assets/cards/10S.svg" width="40px"height="60px">`);}
+            blackWarEl.html(`<img src="./assets/cards/10S.svg" width="40px"height="60px" class="card">`);}
         else if (drawnBlack[drawnBlack.length-1] === "0C"){
-            blackWarEl.html(`<img src="./assets/cards/10C.svg" width="40px"height="60px">`);}
+            blackWarEl.html(`<img src="./assets/cards/10C.svg" width="40px"height="60px" class="card">`);}
         else if (drawnBlack[drawnBlack.length-1] === "0H"){
-            blackWarEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px">`);}
+            blackWarEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px" class="card">`);}
         else if (drawnBlack[drawnBlack.length-1] === "0D"){
-            blackWarEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
-        else {blackWarEl.html(`<img src="./assets/cards/${drawnBlack[drawnBlack.length-1]}.svg" width="40px"height="60px">`);}
+            blackWarEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px" class="card">`);}
+        else {blackWarEl.html(`<img src="./assets/cards/${drawnBlack[drawnBlack.length-1]}.svg" width="40px"height="60px" class="card">`);}
         // console.log("Updated Black Player's Top War Card.");
         
     } else {blackWarEl.html('');}
@@ -79,14 +80,14 @@ function updateRedWar(){
     //Red War Pile should be face up and show last card in that array
     if (drawnRed.length > 0)
         {if (drawnRed[drawnRed.length-1] === "0S"){
-            redWarEl.html(`<img src="./assets/cards/10S.svg" width="40px"height="60px">`);}
+            redWarEl.html(`<img src="./assets/cards/10S.svg" width="40px"height="60px" class="card">`);}
         else if (drawnRed[drawnRed.length-1] === "0C"){
-            redWarEl.html(`<img src="./assets/cards/10C.svg" width="40px"height="60px">`);}
+            redWarEl.html(`<img src="./assets/cards/10C.svg" width="40px"height="60px" class="card">`);}
         else if (drawnRed[drawnRed.length-1] === "0H"){
-            redWarEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px">`);}
+            redWarEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px" class="card">`);}
         else if (drawnRed[drawnRed.length-1] === "0D"){
-            redWarEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
-        else {redWarEl.html(`<img src="./assets/cards/${drawnRed[drawnRed.length-1]}.svg" width="40px"height="60px">`);}
+            redWarEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px" class="card">`);}
+        else {redWarEl.html(`<img src="./assets/cards/${drawnRed[drawnRed.length-1]}.svg" width="40px"height="60px" class="card">`);}
         // console.log("Updated Red Player's Top War Card.");
         
     } else {redWarEl.html('');}
@@ -96,14 +97,14 @@ function updateRedWar(){
 
 function updateBlackHand(){
     //Black Hand Pile should be face down and always show a cardback
-    if (BlackHand.length > 0) {blackHandEl.html(`<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px">`);
+    if (BlackHand.length > 0) {blackHandEl.html(`<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px" class="card">`);
     // console.log("Updated Black Player's Hand Cards (These are hidden!).");
     } else {blackHandEl.html('');}
 }
 
 function updateRedHand(){
     //Red Hand Pile should be face down and always show a cardback
-    if (RedHand.length > 0) {redHandEl.html(`<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px">`);
+    if (RedHand.length > 0) {redHandEl.html(`<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px" class="card">`);
     // console.log("Updated Red Player's Hand Cards (These are hidden!).");
     } else {redHandEl.html('');}
 }
@@ -115,13 +116,13 @@ function updateRedHand(){
 //     blackSpoilsEl.html('');
 //     if (wonBlack.length > 0) {wonBlack.forEach(card => 
 //         {if (card === "0S"){
-//             blackSpoilsEl.html(`<img src="./assets/cards/10S.svg" width="40px"height="60px">`);}
+//             blackSpoilsEl.html(`<img src="./assets/cards/10S.svg" width="40px"height="60px" class="card">`);}
 //         else if (card === "0C"){
-//             blackSpoilsEl.html(`<img src="./assets/cards/10C.svg" width="40px"height="60px">`);}
+//             blackSpoilsEl.html(`<img src="./assets/cards/10C.svg" width="40px"height="60px" class="card">`);}
 //         else if (card === "0H"){
-//             blackSpoilsEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px">`);}
+//             blackSpoilsEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px" class="card">`);}
 //         else if (card === "0D"){
-//             blackSpoilsEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
+//             blackSpoilsEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px" class="card">`);}
 //         else {let wonBlack = $(`<img src="./assets/cards/${card}.svg" width="40" height="60">`);
 //         blackSpoilsEl.append(wonBlack);}
 //         console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");
@@ -137,13 +138,13 @@ function updateRedHand(){
 //     redSpoilsEl.html('');
 //     if (wonRed.length > 0) {wonRed.forEach(card => 
 //         {if (card === "0S"){
-//             redSpoilsEl.html(`<img src="./assets/cards/10S.svg" width="40px"height="60px">`);}
+//             redSpoilsEl.html(`<img src="./assets/cards/10S.svg" width="40px"height="60px" class="card">`);}
 //         else if (card === "0C"){
-//             redSpoilsEl.html(`<img src="./assets/cards/10C.svg" width="40px"height="60px">`);}
+//             redSpoilsEl.html(`<img src="./assets/cards/10C.svg" width="40px"height="60px" class="card">`);}
 //         else if (card === "0H"){
-//             redSpoilsEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px">`);}
+//             redSpoilsEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px" class="card">`);}
 //         else if (card === "0D"){
-//             redSpoilsEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
+//             redSpoilsEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px" class="card">`);}
 //         else {let wonRed = $(`<img src="./assets/cards/${card}.svg" width="40" height="60">`);
 //         redSpoilsEl.append(wonRed);}
 //         console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");
@@ -157,15 +158,15 @@ function updateBlackSpoils() {
     blackSpoilsEl.html('');
     if (wonBlack.length > 0)  
         {if (wonBlack[wonBlack.length-1] === "0S"){
-            blackSpoilsEl.html(`<img src="./assets/cards/10S.svg" width="40px"height="60px">`);}
+            blackSpoilsEl.html(`<img src="./assets/cards/10S.svg" width="40px"height="60px" class="card">`);}
         else if (wonBlack[wonBlack.length-1] === "0C"){
-            blackSpoilsEl.html(`<img src="./assets/cards/10C.svg" width="40px"height="60px">`);}
+            blackSpoilsEl.html(`<img src="./assets/cards/10C.svg" width="40px"height="60px" class="card">`);}
         else if (wonBlack[wonBlack.length-1] === "0H"){
-            blackSpoilsEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px">`);}
+            blackSpoilsEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px" class="card">`);}
         else if (wonBlack[wonBlack.length-1] === "0D"){
-            blackSpoilsEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
+            blackSpoilsEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px" class="card">`);}
         else {
-            let lastBlack = $(`<img src="./assets/cards/${wonBlack[wonBlack.length-1]}.svg" width="40px"height="60px">`);
+            let lastBlack = $(`<img src="./assets/cards/${wonBlack[wonBlack.length-1]}.svg" width="40px"height="60px" class="card">`);
             blackSpoilsEl.append(lastBlack);
         }
         // console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");
@@ -178,15 +179,15 @@ function updateRedSpoils() {
     redSpoilsEl.html('');
     if (wonRed.length > 0)
         {if (wonRed[wonRed.length-1] === "0S"){
-            redSpoilsEl.html(`<img src="./assets/cards/10S.svg" width="40px"height="60px">`);}
+            redSpoilsEl.html(`<img src="./assets/cards/10S.svg" width="40px"height=" class="card">`);}
         else if (wonRed[wonRed.length-1] === "0C"){
-            redSpoilsEl.html(`<img src="./assets/cards/10C.svg" width="40px"height="60px">`);}
+            redSpoilsEl.html(`<img src="./assets/cards/10C.svg" width="40px"height="60px" class="card">`);}
         else if (wonRed[wonRed.length-1] === "0H"){
-            redSpoilsEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px">`);}
+            redSpoilsEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px" class="card">`);}
         else if (wonRed[wonRed.length-1] === "0D"){
-            redSpoilsEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
+            redSpoilsEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px" class="card">`);}
         else {
-            let lastRed = $(`<img src="./assets/cards/${wonRed[wonRed.length-1]}.svg" width="40px"height="60px">`);
+            let lastRed = $(`<img src="./assets/cards/${wonRed[wonRed.length-1]}.svg" width="40px"height="60px" class="card">`);
             redSpoilsEl.append(lastRed);
         }
         // console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");
@@ -202,13 +203,13 @@ function updateBlackCamp() {
     let blackCardCamp;
     if (contestedBlack.length > 0) {contestedBlack.forEach(card => 
         {if (card === "0S"){
-            blackCardCamp = $(`<img src="./assets/cards/10S.svg" width="40px"height="60px">`);}
+            blackCardCamp = $(`<img src="./assets/cards/10S.svg" width="40px"height="60px" class="card">`);}
         else if (card === "0C"){
-            blackCardCamp = $(`<img src="./assets/cards/10C.svg" width="40px"height="60px">`);}
+            blackCardCamp = $(`<img src="./assets/cards/10C.svg" width="40px"height="60px" class="card">`);}
         else if (card === "0H"){
-            blackCardCamp = $(`<img src="./assets/cards/10H.svg" width="40px"height="60px">`);}
+            blackCardCamp = $(`<img src="./assets/cards/10H.svg" width="40px"height="60px" class="card">`);}
         else if (card === "0D"){
-            blackCardCamp = $(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
+            blackCardCamp = $(`<img src="./assets/cards/10D.svg" width="40px"height="60px" class="card">`);}
         else {blackCardCamp = $(`<img src="./assets/cards/${card}.svg" width="40" height="60">`);}
         blackCampEl.append(blackCardCamp);
         // console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");
@@ -222,14 +223,14 @@ function updateRedCamp() {
     let redCardCamp
     if (contestedRed.length > 0) {contestedRed.forEach(card => 
         {if (card === "0S"){
-            redCardCamp = $(`<img src="./assets/cards/10S.svg" width="40px"height="60px">`);}
+            redCardCamp = $(`<img src="./assets/cards/10S.svg" width="40px"height="60px" class="card">`);}
         else if (card === "0C"){
-            redCardCamp = $(`<img src="./assets/cards/10C.svg" width="40px"height="60px">`);}
+            redCardCamp = $(`<img src="./assets/cards/10C.svg" width="40px"height="60px" class="card">`);}
         else if (card === "0H"){
-            redCardCamp = $(`<img src="./assets/cards/10H.svg" width="40px"height="60px">`);}
+            redCardCamp = $(`<img src="./assets/cards/10H.svg" width="40px"height="60px" class="card">`);}
         else if (card === "0D"){
-            redCardCamp = $(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
-        else {redCardCamp = $(`<img src="./assets/cards/${card}.svg" width="40" height="60">`);}
+            redCardCamp = $(`<img src="./assets/cards/10D.svg" width="40px"height="60px" class="card">`);}
+        else {redCardCamp = $(`<img src="./assets/cards/${card}.svg" width="40" height="60" class="card">`);}
         redCampEl.append(redCardCamp);
         // console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");
         })}
@@ -564,11 +565,14 @@ function resolveTurn(){
     console.log(RedHand.length, "cards left got Red");
 };
 
+
 function endGame(){
     console.log(`Game Over: ${winner} wins!!`)
     game = 'over'
     deckNoise.load();
     deckNoise.play();
+    if (winner == 'Red') {$win-modal.show();}
+    if (winner == 'Black') {$lose-modal.show();}
 }
 
 
@@ -646,22 +650,18 @@ function loadGameState() {
 }
 
 
-// loadGameState()
-loadGameState()
-updatePlayerNames()
-updateAllCards()
-
 startGameBtn.on('click', function(event) {
     event.preventDefault();
     $(saveGameBtn).css('display', 'inline');
     $(testGameBtn).css('display', 'inline');
     $(startGameBtn).css('display', 'none');
 });
-    // // function checkWin(){
 
-// redCardsHere.addEventListener("click", function(event){
-//     console.log(event.target)
-//     if( event.target.matches('.card') ){
-//         console.log(`card clicked: ${event.target.getAttribute("data-value")} of ${event.target.getAttribute("data-suit")}`)
-//     }
-// 
+function leaveGame(){
+    localStorage.clear();
+    window.location.replace("./index.html");
+}
+
+loadGameState()
+updatePlayerNames()
+updateAllCards()
