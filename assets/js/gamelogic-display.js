@@ -601,8 +601,8 @@ function saveGameState() {
         game: game,
         winner: winner,
         winnerDeck: winnerDeck,
-        blackPlayerName: blackPlayerNameEl.val(''),
-        redPlayerName: redPlayerNameEl.val('')
+        blackPlayerName: "Black Bart",
+        redPlayerName: "Erik the Red"
     };
 
 let gameStateString = JSON.stringify(gameState);
