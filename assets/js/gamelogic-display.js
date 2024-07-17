@@ -216,8 +216,8 @@ function updateBlackCamp() {
             blackCardCamp = $(`<img src="./assets/cards/10H.svg" width="40px"height="60px">`);}
         else if (card === "0D"){
             blackCardCamp = $(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
-        else {blackCardCamp = $(`<img src="./assets/cards/${card}.svg" width="40" height="60">`);
-        blackCampEl.append(blackCardCamp);}
+        else {blackCardCamp = $(`<img src="./assets/cards/${card}.svg" width="40" height="60">`);}
+        blackCampEl.append(blackCardCamp);
         console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");
         cardNoise.load();
         cardNoise.play();})}
@@ -237,8 +237,8 @@ function updateRedCamp() {
             redCardCamp = $(`<img src="./assets/cards/10H.svg" width="40px"height="60px">`);}
         else if (card === "0D"){
             redCardCamp = $(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
-        else {redCardCamp = $(`<img src="./assets/cards/${card}.svg" width="40" height="60">`);
-        redCampEl.append(redCardCamp);}
+        else {redCardCamp = $(`<img src="./assets/cards/${card}.svg" width="40" height="60">`);}
+        redCampEl.append(redCardCamp);
         console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");
         cardNoise.load();
         cardNoise.play();})}
@@ -405,19 +405,21 @@ async function turn(){
         console.log('Blacks troops:', BlackHand,);
         console.log('Reds troops:', RedHand,);
         //Draw Cards
-        drawnBlack.push(BlackHand[0])
-        BlackHand.shift()
         drawnRed.push(RedHand[0])
         RedHand.shift()
-        updateBlackWar()
-        updateBlackHand()
         updateRedWar()
         updateRedHand()
-        //TIME OUT FUNCTION GOES HERE, GIVE A COUPLE SECONDS SO WE CAN SEE THE WAR!
-        console.log('At the front lines:', 'Black,', drawnBlack, 'Red,', drawnRed)
+        await new Promise((resolve) => {
+            setTimeout(resolve, 500);
+          })
+        drawnBlack.push(BlackHand[0])
+        BlackHand.shift()
+        updateBlackWar()
+        updateBlackHand()
         await new Promise((resolve) => {
                 setTimeout(resolve, 1000);
               })
+        console.log('At the front lines:', 'Black,', drawnBlack, 'Red,', drawnRed)
 
         //Compare cards
         let result = compareCards();
@@ -443,6 +445,9 @@ async function turn(){
                 updateBlackCamp()
                 BlackHand.shift()
                 updateBlackHand()
+                await new Promise((resolve) => {
+                    setTimeout(resolve, 333);
+                  })
                 console.log(contestedBlack[contestedBlack.length-1], "Has moved to Black encampment")
                 }
                 if (RedHand.length === 1 && wonRed.length === 0){
@@ -452,6 +457,9 @@ async function turn(){
                 updateRedCamp()
                 RedHand.shift()
                 updateRedHand()
+                await new Promise((resolve) => {
+                    setTimeout(resolve, 333);
+                  })
                 console.log(contestedRed[contestedRed.length-1], "Has moved to Red encampment")
                 }
             }
