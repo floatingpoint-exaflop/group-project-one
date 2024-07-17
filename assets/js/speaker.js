@@ -7,6 +7,10 @@ const song = document.querySelector('#disco-ultralounge');
 //getting a variable tied to whatever state we have, if any, from the dark/light mode
 let chosenMode = '🔊';
 
+let deckNoise = new Audio('./assets/sound/cards-on-table.mp3');
+let cardNoise = new Audio('./assets/sound/place-card.mp3');
+let shuffleNoise = new Audio('./assets/sound/shuffle-cards.mp3');
+
 //function looks at the state of light/dark mode, if any. By default, the page will be in light mode (null state), but otherwise it will load as whatever the state icon is set to.
     //I am kind of really liking using emoji in code. It honestly makes it a lot easier for me to keep track of certain stuff.
 const playStop = function() {
