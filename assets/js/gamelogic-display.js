@@ -42,9 +42,10 @@ let winner
 let winnerDeck
 
 //dummy player names
-let blackPlayerName = 'black bart';
-let redPlayerName = 'erik the red';
-
+let blackPlayerName = "Black Bart";
+let redPlayerName = "Erik the Red";
+console.log(blackPlayerName);
+console.log(redPlayerName);
 //TIM'S RENDER FUNCTIONS
 
 //fill player names when game begins
@@ -63,14 +64,14 @@ function updateBlackWar(){
     //Black War Pile should be face up and show last card in that array
     if (drawnBlack.length > 0) 
         {if (drawnBlack[drawnBlack.length-1] === "0S"){
-            blackWarEl.html(`<img src="./assets/cards/10S.svg" width="40px"height="60px" class="card">`);}
+            blackWarEl.html(`<img src="./assets/cards/10S.svg" width="40px" height="60px" class="card">`);}
         else if (drawnBlack[drawnBlack.length-1] === "0C"){
-            blackWarEl.html(`<img src="./assets/cards/10C.svg" width="40px"height="60px" class="card">`);}
+            blackWarEl.html(`<img src="./assets/cards/10C.svg" width="40px" height="60px" class="card">`);}
         else if (drawnBlack[drawnBlack.length-1] === "0H"){
-            blackWarEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px" class="card">`);}
+            blackWarEl.html(`<img src="./assets/cards/10H.svg" width="40px" height="60px" class="card">`);}
         else if (drawnBlack[drawnBlack.length-1] === "0D"){
-            blackWarEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px" class="card">`);}
-        else {blackWarEl.html(`<img src="./assets/cards/${drawnBlack[drawnBlack.length-1]}.svg" width="40px"height="60px" class="card">`);}
+            blackWarEl.html(`<img src="./assets/cards/10D.svg" width="40px" height="60px" class="card">`);}
+        else {blackWarEl.html(`<img src="./assets/cards/${drawnBlack[drawnBlack.length-1]}.svg" width="40px" height="60px" class="card">`);}
         // console.log("Updated Black Player's Top War Card.");
         
     } else {blackWarEl.html('');}
@@ -80,14 +81,14 @@ function updateRedWar(){
     //Red War Pile should be face up and show last card in that array
     if (drawnRed.length > 0)
         {if (drawnRed[drawnRed.length-1] === "0S"){
-            redWarEl.html(`<img src="./assets/cards/10S.svg" width="40px"height="60px" class="card">`);}
+            redWarEl.html(`<img src="./assets/cards/10S.svg" width="40px" height="60px" class="card">`);}
         else if (drawnRed[drawnRed.length-1] === "0C"){
-            redWarEl.html(`<img src="./assets/cards/10C.svg" width="40px"height="60px" class="card">`);}
+            redWarEl.html(`<img src="./assets/cards/10C.svg" width="40px" height="60px" class="card">`);}
         else if (drawnRed[drawnRed.length-1] === "0H"){
-            redWarEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px" class="card">`);}
+            redWarEl.html(`<img src="./assets/cards/10H.svg" width="40px" height="60px" class="card">`);}
         else if (drawnRed[drawnRed.length-1] === "0D"){
-            redWarEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px" class="card">`);}
-        else {redWarEl.html(`<img src="./assets/cards/${drawnRed[drawnRed.length-1]}.svg" width="40px"height="60px" class="card">`);}
+            redWarEl.html(`<img src="./assets/cards/10D.svg" width="40px" height="60px" class="card">`);}
+        else {redWarEl.html(`<img src="./assets/cards/${drawnRed[drawnRed.length-1]}.svg" width="40px" height="60px" class="card">`);}
         // console.log("Updated Red Player's Top War Card.");
         
     } else {redWarEl.html('');}
@@ -97,14 +98,14 @@ function updateRedWar(){
 
 function updateBlackHand(){
     //Black Hand Pile should be face down and always show a cardback
-    if (BlackHand.length > 0) {blackHandEl.html(`<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px" class="card">`);
+    if (BlackHand.length > 0) {blackHandEl.html(`<img src="./assets/cards/RED_BACK.svg" width="40px" height="60px" class="card">`);
     // console.log("Updated Black Player's Hand Cards (These are hidden!).");
     } else {blackHandEl.html('');}
 }
 
 function updateRedHand(){
     //Red Hand Pile should be face down and always show a cardback
-    if (RedHand.length > 0) {redHandEl.html(`<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px" class="card">`);
+    if (RedHand.length > 0) {redHandEl.html(`<img src="./assets/cards/RED_BACK.svg" width="40px" height="60px" class="card">`);
     // console.log("Updated Red Player's Hand Cards (These are hidden!).");
     } else {redHandEl.html('');}
 }
@@ -123,7 +124,7 @@ function updateRedHand(){
 //             blackSpoilsEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px" class="card">`);}
 //         else if (card === "0D"){
 //             blackSpoilsEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px" class="card">`);}
-//         else {let wonBlack = $(`<img src="./assets/cards/${card}.svg" width="40" height="60">`);
+//         else {let wonBlack = $(`<img src="./assets/cards/${card}.svg" width="40" height="60px">`);
 //         blackSpoilsEl.append(wonBlack);}
 //         console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");
 //         cardNoise.load();
@@ -145,7 +146,7 @@ function updateRedHand(){
 //             redSpoilsEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px" class="card">`);}
 //         else if (card === "0D"){
 //             redSpoilsEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px" class="card">`);}
-//         else {let wonRed = $(`<img src="./assets/cards/${card}.svg" width="40" height="60">`);
+//         else {let wonRed = $(`<img src="./assets/cards/${card}.svg" width="40" height="60px">`);
 //         redSpoilsEl.append(wonRed);}
 //         console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");
 //         cardNoise.load();
@@ -158,13 +159,13 @@ function updateBlackSpoils() {
     blackSpoilsEl.html('');
     if (wonBlack.length > 0)  
         {if (wonBlack[wonBlack.length-1] === "0S"){
-            blackSpoilsEl.html(`<img src="./assets/cards/10S.svg" width="40px"height="60px" class="card">`);}
+            blackSpoilsEl.html(`<img src="./assets/cards/10S.svg" width="40px" height="60px" class="card">`);}
         else if (wonBlack[wonBlack.length-1] === "0C"){
-            blackSpoilsEl.html(`<img src="./assets/cards/10C.svg" width="40px"height="60px" class="card">`);}
+            blackSpoilsEl.html(`<img src="./assets/cards/10C.svg" width="40px" height="60px" class="card">`);}
         else if (wonBlack[wonBlack.length-1] === "0H"){
-            blackSpoilsEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px" class="card">`);}
+            blackSpoilsEl.html(`<img src="./assets/cards/10H.svg" width="40px" height="60px" class="card">`);}
         else if (wonBlack[wonBlack.length-1] === "0D"){
-            blackSpoilsEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px" class="card">`);}
+            blackSpoilsEl.html(`<img src="./assets/cards/10D.svg" width="40px" height="60px" class="card">`);}
         else {
             let lastBlack = $(`<img src="./assets/cards/${wonBlack[wonBlack.length-1]}.svg" width="40px"height="60px" class="card">`);
             blackSpoilsEl.append(lastBlack);
@@ -179,13 +180,13 @@ function updateRedSpoils() {
     redSpoilsEl.html('');
     if (wonRed.length > 0)
         {if (wonRed[wonRed.length-1] === "0S"){
-            redSpoilsEl.html(`<img src="./assets/cards/10S.svg" width="40px"height=" class="card">`);}
+            redSpoilsEl.html(`<img src="./assets/cards/10S.svg" width="40px" height="60px" class="card">`);}
         else if (wonRed[wonRed.length-1] === "0C"){
-            redSpoilsEl.html(`<img src="./assets/cards/10C.svg" width="40px"height="60px" class="card">`);}
+            redSpoilsEl.html(`<img src="./assets/cards/10C.svg" width="40px" height="60px" class="card">`);}
         else if (wonRed[wonRed.length-1] === "0H"){
-            redSpoilsEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px" class="card">`);}
+            redSpoilsEl.html(`<img src="./assets/cards/10H.svg" width="40px" height="60px" class="card">`);}
         else if (wonRed[wonRed.length-1] === "0D"){
-            redSpoilsEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px" class="card">`);}
+            redSpoilsEl.html(`<img src="./assets/cards/10D.svg" width="40px" height="60px" class="card">`);}
         else {
             let lastRed = $(`<img src="./assets/cards/${wonRed[wonRed.length-1]}.svg" width="40px"height="60px" class="card">`);
             redSpoilsEl.append(lastRed);
@@ -203,14 +204,14 @@ function updateBlackCamp() {
     let blackCardCamp;
     if (contestedBlack.length > 0) {contestedBlack.forEach(card => 
         {if (card === "0S"){
-            blackCardCamp = $(`<img src="./assets/cards/10S.svg" width="40px"height="60px" class="card">`);}
+            blackCardCamp = $(`<img src="./assets/cards/10S.svg" width="40px" height="60px" class="card">`);}
         else if (card === "0C"){
-            blackCardCamp = $(`<img src="./assets/cards/10C.svg" width="40px"height="60px" class="card">`);}
+            blackCardCamp = $(`<img src="./assets/cards/10C.svg" width="40px" height="60px" class="card">`);}
         else if (card === "0H"){
             blackCardCamp = $(`<img src="./assets/cards/10H.svg" width="40px"height="60px" class="card">`);}
         else if (card === "0D"){
-            blackCardCamp = $(`<img src="./assets/cards/10D.svg" width="40px"height="60px" class="card">`);}
-        else {blackCardCamp = $(`<img src="./assets/cards/${card}.svg" width="40" height="60">`);}
+            blackCardCamp = $(`<img src="./assets/cards/10D.svg" width="40px" height="60px" class="card">`);}
+        else {blackCardCamp = $(`<img src="./assets/cards/${card}.svg" width="40" height="60px" class="card">`);}
         blackCampEl.append(blackCardCamp);
         // console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");
         })}
@@ -223,14 +224,14 @@ function updateRedCamp() {
     let redCardCamp
     if (contestedRed.length > 0) {contestedRed.forEach(card => 
         {if (card === "0S"){
-            redCardCamp = $(`<img src="./assets/cards/10S.svg" width="40px"height="60px" class="card">`);}
+            redCardCamp = $(`<img src="./assets/cards/10S.svg" width="40px" height="60px" class="card">`);}
         else if (card === "0C"){
-            redCardCamp = $(`<img src="./assets/cards/10C.svg" width="40px"height="60px" class="card">`);}
+            redCardCamp = $(`<img src="./assets/cards/10C.svg" width="40px" height="60px" class="card">`);}
         else if (card === "0H"){
-            redCardCamp = $(`<img src="./assets/cards/10H.svg" width="40px"height="60px" class="card">`);}
+            redCardCamp = $(`<img src="./assets/cards/10H.svg" width="40px" height="60px" class="card">`);}
         else if (card === "0D"){
-            redCardCamp = $(`<img src="./assets/cards/10D.svg" width="40px"height="60px" class="card">`);}
-        else {redCardCamp = $(`<img src="./assets/cards/${card}.svg" width="40" height="60" class="card">`);}
+            redCardCamp = $(`<img src="./assets/cards/10D.svg" width="40px" height="60px" class="card">`);}
+        else {redCardCamp = $(`<img src="./assets/cards/${card}.svg" width="40" height="60px" class="card">`);}
         redCampEl.append(redCardCamp);
         // console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");
         })}

@@ -1,5 +1,5 @@
 img.card {
-	width: 70px;
+	width: 50px;
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -11,7 +11,7 @@ img.card {
  * A hand is a div containing cards.
  */
 .hand {
-	padding: 0;
+	padding: 10;
 	margin: 0;
 }
 .active-hand img.card { 
@@ -22,10 +22,11 @@ img.card {
  * A horizontal hand, class="hand hhand".  The enitire card is visible.
  */
 .hhand {
-	display: inline-block; 
+	/* display: inline-block;  */
 }
+
 .hhand img.card { 
-	padding-top: 10px;
+	padding-top: 0px;
 }
 .hhand.active-hand img.card:hover { 
 	padding-top: 0px;
@@ -50,11 +51,11 @@ img.card {
  * A compact horizontal hand.  Only the last card is entirely visible.
  */
 .hhand-compact { 
-	display: inline-block; 
+	/* display: inline-block;  */
 }
 .hhand-compact img.card:first-child { 
 	margin-left: 0px;
-	padding-top: 10px;
+	/* padding-top: 10px; */
 }
 .hhand-compact img.card { 
 	margin-left: -52px;
@@ -102,4 +103,25 @@ img.card {
 .fan img.card { 
 	position: absolute;
 	width: 90px;
+}
+
+
+div#battleground div#war-black-round-2.hand.hhand.hhand-horiz {
+	display: flex;
+}
+
+div#battleground #war-black-space #war-black-round-2 {
+	display: flex;
+	justify-content: center;
+	gap: 5px;
+}
+
+div#battleground div#war-red-round-2.hand.hhand.hhand-horiz {
+	display: flex;
+}
+
+div#battleground #war-red-space #war-red-round-2 {
+	display: flex;
+	justify-content: center;
+	gap: 5px;
 }
