@@ -3,7 +3,8 @@ const startGameBtn = $('#start-game-button').css('display', 'inline');
 const saveGameBtn = $('#save-game-button').css('display', 'none');
 const testGameBtn = $('#test-turn-button').css('display', 'none');
 const musicBtn = $('#🔊');
-const viewRulesModalBtn = $('#computer-name-box');
+const youLose = $('#lose-modal');
+const youWin = $('#win-modal');
 
 //------Black Player's Card Location DOM Elements------
 const blackPlayerNameEl = $('#computer-name-box');
@@ -564,11 +565,14 @@ function resolveTurn(){
     console.log(RedHand.length, "cards left got Red");
 };
 
+
 function endGame(){
     console.log(`Game Over: ${winner} wins!!`)
     game = 'over'
     deckNoise.load();
     deckNoise.play();
+    if (winner == 'Red') {$win-modal.show();}
+    if (winner == 'Black') {$lose-modal.show();}
 }
 
 
