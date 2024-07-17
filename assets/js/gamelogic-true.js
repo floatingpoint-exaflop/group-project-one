@@ -113,7 +113,6 @@ async function listHand(hand){
             currentHand.push(element.code)
              console.log(`${hand}'s reinforcements have arrived!!`)
         })
-        go = true
         if (data.piles[hand].remaining = 0){
             console.log('Game Over:')
         }
