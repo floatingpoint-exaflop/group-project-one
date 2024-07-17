@@ -1,6 +1,7 @@
 //-----------User Input DOM Elements-------------------
-const saveGameBtn = $('#save-game-button');
-const testGameBtn = $('#test-game-button');
+const startGameBtn = $('#start-game-button').css('display', 'inline');
+const saveGameBtn = $('#save-game-button').css('display', 'none');
+const testGameBtn = $('#test-turn-button').css('display', 'none');
 const musicBtn = $('#🔊');
 const viewRulesModalBtn = $('#computer-name-box');
 
@@ -635,6 +636,9 @@ function loadGameState() {
         game = game;
         winner = storedGameState.winner;
         winnerDeck = storedGameState.winnerDeck;
+        $(saveGameBtn).css('display', 'inline');
+        $(testGameBtn).css('display', 'inline');
+        $(startGameBtn).css('display', 'none');
         updateAllCards();
     }
 }
@@ -645,6 +649,12 @@ loadGameState()
 // updatePlayerNames()
 // updateAllCards()
 
+startGameBtn.on('click', function(event) {
+    event.preventDefault();
+    $(saveGameBtn).css('display', 'inline');
+    $(testGameBtn).css('display', 'inline');
+    $(startGameBtn).css('display', 'none');
+});
     // // function checkWin(){
 
 // redCardsHere.addEventListener("click", function(event){
