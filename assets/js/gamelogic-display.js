@@ -70,7 +70,7 @@ function updateBlackWar(){
         else if (drawnBlack[drawnBlack.length-1] === "0D"){
             blackWarEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
         else {blackWarEl.html(`<img src="./assets/cards/${drawnBlack[drawnBlack.length-1]}.svg" width="40px"height="60px">`);}
-        console.log("Updated Black Player's Top War Card.");
+        // console.log("Updated Black Player's Top War Card.");
         
     } else {blackWarEl.html('');}
 }
@@ -87,7 +87,7 @@ function updateRedWar(){
         else if (drawnRed[drawnRed.length-1] === "0D"){
             redWarEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
         else {redWarEl.html(`<img src="./assets/cards/${drawnRed[drawnRed.length-1]}.svg" width="40px"height="60px">`);}
-        console.log("Updated Red Player's Top War Card.");
+        // console.log("Updated Red Player's Top War Card.");
         
     } else {redWarEl.html('');}
 }
@@ -97,14 +97,14 @@ function updateRedWar(){
 function updateBlackHand(){
     //Black Hand Pile should be face down and always show a cardback
     if (BlackHand.length > 0) {blackHandEl.html(`<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px">`);
-    console.log("Updated Black Player's Hand Cards (These are hidden!).");
+    // console.log("Updated Black Player's Hand Cards (These are hidden!).");
     } else {blackHandEl.html('');}
 }
 
 function updateRedHand(){
     //Red Hand Pile should be face down and always show a cardback
     if (RedHand.length > 0) {redHandEl.html(`<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px">`);
-    console.log("Updated Red Player's Hand Cards (These are hidden!).");
+    // console.log("Updated Red Player's Hand Cards (These are hidden!).");
     } else {redHandEl.html('');}
 }
 
@@ -168,7 +168,7 @@ function updateBlackSpoils() {
             let lastBlack = $(`<img src="./assets/cards/${wonBlack[wonBlack.length-1]}.svg" width="40px"height="60px">`);
             blackSpoilsEl.append(lastBlack);
         }
-        console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");
+        // console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");
         }
     else {blackSpoilsEl.html('');}
 }
@@ -189,7 +189,7 @@ function updateRedSpoils() {
             let lastRed = $(`<img src="./assets/cards/${wonRed[wonRed.length-1]}.svg" width="40px"height="60px">`);
             redSpoilsEl.append(lastRed);
         }
-        console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");
+        // console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");
         }
     else {redSpoilsEl.html('');}
 }
@@ -211,7 +211,7 @@ function updateBlackCamp() {
             blackCardCamp = $(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
         else {blackCardCamp = $(`<img src="./assets/cards/${card}.svg" width="40" height="60">`);}
         blackCampEl.append(blackCardCamp);
-        console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");
+        // console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");
         })}
     else blackCampEl.html('');
 }
@@ -231,7 +231,7 @@ function updateRedCamp() {
             redCardCamp = $(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
         else {redCardCamp = $(`<img src="./assets/cards/${card}.svg" width="40" height="60">`);}
         redCampEl.append(redCardCamp);
-        console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");
+        // console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");
         })}
     else redCampEl.html('');
 }
@@ -432,6 +432,9 @@ async function turn(){
             console.log("Tie! It's a War!")
             for (i=0; i < 3; i++){
                 await statusCheck()
+                if (game == 'over'){
+                    break; 
+                }
                 if (BlackHand.length === 1 && wonBlack.length === 0){
                     console.log('Blacks champion: ', BlackHand[0])
                 } else { 
@@ -462,7 +465,9 @@ async function turn(){
                 }
             }
         }   
+        if (game == ''){
         await statusCheck()
+        }
         go = true
     } else {
         console.log('slow down there buck-o')
