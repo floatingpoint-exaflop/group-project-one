@@ -68,7 +68,7 @@ function updateBlackWar(){
             blackWarEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px">`);}
         else if (drawnBlack[drawnBlack.length-1] === "0D"){
             blackWarEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
-        else {blackWarEl.html(`<img src="./assets/cards/${drawnBlack.pop()}.svg" width="40px"height="60px">`);}
+        else {blackWarEl.html(`<img src="./assets/cards/${drawnBlack[drawnBlack.length-1]}.svg" width="40px"height="60px">`);}
         console.log("Updated Black Player's Top War Card.");
     } else {blackWarEl.html('');}
 }
@@ -84,7 +84,7 @@ function updateRedWar(){
             redWarEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px">`);}
         else if (drawnRed[drawnRed.length-1] === "0D"){
             redWarEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
-        else {redWarEl.html(`<img src="./assets/cards/${drawnRed.pop()}.svg" width="40px"height="60px">`);}
+        else {redWarEl.html(`<img src="./assets/cards/${drawnRed[drawnRed.length-1]}.svg" width="40px"height="60px">`);}
         console.log("Updated Red Player's Top War Card.");}
      else {redWarEl.html('');}
 }
@@ -105,19 +105,56 @@ function updateRedHand(){
     } else redCampEl.html('');
 }
 
-function updateBlackSpoils(){
-    //Spoils Black Pile should be face down and always show a cardback
-    if (wonBlack.length > 0) {blackSpoilsEl.html(`<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px">`);
-    console.log("Updated Black Player's Winnings/Spoils (These are hidden!).");
-    } else blackSpoilsEl.html('');
+// function updateBlackSpoils(){
+//     //Spoils Black Pile should be face down and always show a cardback
+//     if (wonBlack.length > 0) {blackSpoilsEl.html(`<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px">`);
+//     console.log("Updated Black Player's Winnings/Spoils (These are hidden!).");
+//     } else blackSpoilsEl.html('');
+// }
+
+function updateBlackSpoils() {
+    // Clear the existing content of blackCampEl first
+    blackSpoilsEl.html('');
+    if (wonBlack.length > 0) {wonBlack.forEach(card => 
+        {if (card === "0S"){
+            blackSpoilsEl.html(`<img src="./assets/cards/10S.svg" width="40px"height="60px">`);}
+        else if (card === "0C"){
+            blackSpoilsEl.html(`<img src="./assets/cards/10C.svg" width="40px"height="60px">`);}
+        else if (card === "0H"){
+            blackSpoilsEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px">`);}
+        else if (card === "0D"){
+            blackSpoilsEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
+        else {let wonBlack = $(`<img src="./assets/cards/${card}.svg" width="40" height="60">`);
+        blackSpoilsEl.append(wonBlack);}
+        console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");})}
+    else blackCampEl.html('');
 }
 
-function updateRedSpoils(){
-    //Spoils Black Pile should be face down and always show a cardback
-    if (wonRed.length > 0) {redSpoilsEl.html(`<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px">`);
-    console.log("Updated Red Player's Winnings/Spoils (These are hidden!).");
-    } else redSpoilsEl.html('');
+// function updateRedSpoils(){      OLD VERSION
+//     //Spoils Red Pile should be face down and always show a cardback
+//     if (wonRed.length > 0) {redSpoilsEl.html(`<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px">`);
+//     console.log("Updated Red Player's Winnings/Spoils (These are hidden!).");
+//     } else redSpoilsEl.html('');
+// }
+
+function updateRedSpoils() {
+    // Clear the existing content of blackCampEl first
+    redSpoilsEl.html('');
+    if (wonRed.length > 0) {wonRed.forEach(card => 
+        {if (card === "0S"){
+            redSpoilsEl.html(`<img src="./assets/cards/10S.svg" width="40px"height="60px">`);}
+        else if (card === "0C"){
+            redSpoilsEl.html(`<img src="./assets/cards/10C.svg" width="40px"height="60px">`);}
+        else if (card === "0H"){
+            redSpoilsEl.html(`<img src="./assets/cards/10H.svg" width="40px"height="60px">`);}
+        else if (card === "0D"){
+            redSpoilsEl.html(`<img src="./assets/cards/10D.svg" width="40px"height="60px">`);}
+        else {let wonRed = $(`<img src="./assets/cards/${card}.svg" width="40" height="60">`);
+        redSpoilsEl.append(wonRed);}
+        console.log("Updated Black Player's Camp Cards. These are at stake if Red wins this War!");})}
+    else redCampEl.html('');
 }
+
 
 function updateBlackCamp() {
     // Clear the existing content of blackCampEl first
