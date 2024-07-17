@@ -105,7 +105,7 @@ function updateRedHand(){
     //Red Hand Pile should be face down and always show a cardback
     if (RedHand.length > 0) {redHandEl.html(`<img src="./assets/cards/RED_BACK.svg" width="40px"height="60px">`);
     console.log("Updated Red Player's Hand Cards (These are hidden!).");
-    } else {redCampEl.html('');}
+    } else {redHandEl.html('');}
 }
 
 
@@ -298,6 +298,7 @@ async function buildPiles(){
     }
     deckNoise.load();
     deckNoise.play();
+    
 }
 
 //END SETUP:
@@ -642,8 +643,8 @@ function loadGameState() {
 
 // loadGameState()
 loadGameState()
-// updatePlayerNames()
-// updateAllCards()
+updatePlayerNames()
+updateAllCards()
 
 startGameBtn.on('click', function(event) {
     event.preventDefault();
