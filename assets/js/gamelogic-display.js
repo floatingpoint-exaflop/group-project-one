@@ -572,8 +572,8 @@ function endGame(){
     game = 'over'
     deckNoise.load();
     deckNoise.play();
-    if (winner == 'Red') {$win-modal.show();}
-    if (winner == 'Black') {$lose-modal.show();}
+    if (winner == 'Red') {$('#win-modal').modal('show');}
+    if (winner == 'Black') {$('#lose-modal').modal('show');}
 }
 
 
